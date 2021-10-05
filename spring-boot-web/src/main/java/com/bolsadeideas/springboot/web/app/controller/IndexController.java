@@ -1,7 +1,13 @@
 package com.bolsadeideas.springboot.web.app.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap; //import org.springframework.ui.Model;
+
+//import org.springframework.ui.Model;
+//import org.springframework.ui.ModelMap; 
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.RequestMapping; //import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -11,10 +17,12 @@ public class IndexController {
 	//Métodos de acción o Handlers
 	
 	@RequestMapping(value = {"/","/index","home"},method = RequestMethod.GET) //@GetMapping({"/","/index","home"})
-	public String index(ModelMap model) {
+	public String index(Map<String, Object> model) {
 		
 		//Agregramos datos a la vista como un mapa de valores {key,value}
-		model.addAttribute("titulo","Hola Spring Framework!");
+		//model.addAttribute("titulo","Hola Spring Framework!");
+		model.put("titulo","Hola Spring Framework!");
+
 		//nombre de la vista
 		return "index";
 	}
