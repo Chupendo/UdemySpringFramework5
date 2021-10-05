@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1"/> <!-- Comprobar que el encodig del fichero sea el mismo -> click derecho sobre index.html>propieades -->
-<title>Insert title here</title>
+<title th:text="${titulo}">Insert title here</title>
 </head>
 <body>
 	<h1 th:text="titulo">Título principal de la página</h1>
