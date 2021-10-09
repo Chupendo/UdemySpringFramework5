@@ -1,19 +1,15 @@
 package com.bolsadeideas.springboot.web.app.controller;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 
-//import org.springframework.ui.Model;
-//import org.springframework.ui.ModelMap; 
-//import java.util.Map;
 import org.springframework.web.servlet.ModelAndView;
 
-import org.springframework.web.bind.annotation.RequestMapping; //import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
+@RequestMapping(value="/app")
 public class IndexController {
 
 	//Métodos de acción o Handlers
