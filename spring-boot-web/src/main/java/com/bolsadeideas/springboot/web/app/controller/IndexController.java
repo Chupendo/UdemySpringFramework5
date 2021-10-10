@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -53,13 +53,24 @@ public class IndexController {
 	@RequestMapping(value="/listar")
 	public String listar(Model model) {
 		_log.info("Start handler LISTAR");
+		/*
 		List<Usuario> usuarios = new ArrayList<>();
 		usuarios.add(new Usuario("Andres","Ruiz","andres@correo.com"));
 		usuarios.add(new Usuario("John","Doe","john@correo.com"));
 		usuarios.add(new Usuario("Jane","Doe","jane@correo.com"));
-		
+		*/
 		model.addAttribute("titulo", "Listado de Usuarios");
-		model.addAttribute("usuarios", usuarios);
+		//model.addAttribute("usuarios", usuarios);
 		return "listar";
+	}
+	
+	@ModelAttribute("usuarios")
+	public List<Usuario> poblarUsuarios(){
+		_log.info("Start handler POBLARUSUARIOS");
+		List<Usuario> usuarios = new ArrayList<>();
+		usuarios.add(new Usuario("Andres","Ruiz","andres@correo.com"));
+		usuarios.add(new Usuario("John","Doe","john@correo.com"));
+		usuarios.add(new Usuario("Jane","Ruth","jane@correo.com"));
+		return usuarios;
 	}
 }
