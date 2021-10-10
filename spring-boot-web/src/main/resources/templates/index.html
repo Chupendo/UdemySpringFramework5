@@ -6,29 +6,5 @@
 </head>
 <body>
 	<h1 th:text="titulo">Título principal de la página</h1>
-	
-	<div th:if="${usuarios == null}" th:text="'No se ha recibido ninguna lista de usuarios'"></div>
-<div th:unless="${usuarios == null}">
-	<div th:if="${usuarios.size()==0}">Lista de Usuarios vacia!</div>
-	<div th:unless="${usuarios.size()==0}"> 
-		Los usuarios disponibles son:
-		<table>
-			<thead>
-				<th>id</th>
-				<th>Nombre</th>
-				<th>Apellido</th>
-				<th>Email</th>
-			</thead>
-			<tbody>
-				<tr th:each="usuario:${usuarios}">
-					<td th:text="${usuario.idUsuario}"></td>
-					<td th:text="${usuario.nombre}"></td>
-					<td th:text="${usuario.apellido}"></td>
-					<td th:text="${usuario.email}"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>	
-</div>
 </body>
 </html>
