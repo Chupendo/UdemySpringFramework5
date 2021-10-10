@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+<h1 th:text="${titulo}"></h1>
+
+<div th:if="${usuarios == null}" th:text="'No se ha recibido ninguna lista de usuarios'"></div>
+<div th:unless="${usuarios == null}">
+	<div th:if="${usuarios.size()==0}">Lista de Usuarios vacia!</div>
+	<div th:unless="${usuarios.size()==0}"> Los usuarios disponibles son</div>
+</div>
+</body>
+</html>

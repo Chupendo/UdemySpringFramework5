@@ -10,7 +10,7 @@
 <span th:text="${usuario.apellido}"></span>
 <br>
 <span th:if="${usuario.email}" th:text="${usuario.email}"></span>
-<span th:else="${usuario.email==null}" 
+<span th:if="${usuario.email==null}" 
 	th:text="'El usuario notiene email.'"></span>
 
 </body>

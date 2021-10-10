@@ -1,5 +1,8 @@
 package com.bolsadeideas.springboot.web.app.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -45,5 +48,16 @@ public class IndexController {
 		
 		//Devolvemos la vista
 		return "perfil";
+	}
+	
+	@RequestMapping(value="/listar")
+	public String listar(Model model) {
+		_log.info("Start handler LISTAR");
+		List<Usuario> usuarios = new ArrayList<>();
+
+		
+		model.addAttribute("titulo", "Listado de Usuarios");
+		model.addAttribute("usuarios", usuarios);
+		return "listar";
 	}
 }
