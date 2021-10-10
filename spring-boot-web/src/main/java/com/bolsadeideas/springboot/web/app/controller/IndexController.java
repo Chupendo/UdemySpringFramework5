@@ -36,6 +36,7 @@ public class IndexController {
 		Usuario usuario = new Usuario();
 		usuario.setNombre("Andres");
 		usuario.setApellido("Ruiz");
+		
 		model.addAttribute("usuario",usuario);
 		_log.debug("usuario: "+usuario);
 		

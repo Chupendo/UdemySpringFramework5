@@ -8,5 +8,10 @@
 <h1 th:text="'Perfil de '+ ${usuario.nombre}">Título principal de la página</h1>
 <span th:text="${usuario.nombre}"></span>
 <span th:text="${usuario.apellido}"></span>
+<br>
+<span th:if="${usuario.email}" th:text="${usuario.email}"></span>
+<span th:else="${usuario.email==null}" 
+	th:text="'El usuario notiene email.'"></span>
+
 </body>
 </html>

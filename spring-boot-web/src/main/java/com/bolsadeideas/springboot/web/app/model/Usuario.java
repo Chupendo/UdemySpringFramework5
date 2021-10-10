@@ -7,10 +7,19 @@ public class Usuario {
 	private Long idUsuario;
 	private String nombre;
 	private String apellido;
+	private String email;
 	
 	public Usuario(){
 		cont++;
 		idUsuario = cont;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Long getIdUsuario() {
@@ -39,7 +48,7 @@ public class Usuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(apellido, idUsuario, nombre);
+		return Objects.hash(apellido, email, idUsuario, nombre);
 	}
 
 	@Override
@@ -49,14 +58,17 @@ public class Usuario {
 		if (!(obj instanceof Usuario))
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(apellido, other.apellido) && Objects.equals(idUsuario, other.idUsuario)
-				&& Objects.equals(nombre, other.nombre);
+		return Objects.equals(apellido, other.apellido) && Objects.equals(email, other.email)
+				&& Objects.equals(idUsuario, other.idUsuario) && Objects.equals(nombre, other.nombre);
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + "]";
+		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+				+ "]";
 	}
+
+
 	
 	
 }
