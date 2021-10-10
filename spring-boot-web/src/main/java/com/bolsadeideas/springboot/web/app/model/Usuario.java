@@ -13,6 +13,25 @@ public class Usuario {
 		cont++;
 		idUsuario = cont;
 	}
+	
+	public Usuario(String nombre, String apellido, String email) {
+		cont++;
+		idUsuario = cont;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+	}
+
+
+
+	public Usuario(Long idUsuario, String nombre, String apellido, String email) {
+		this.idUsuario = idUsuario;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+	}
+
+
 
 	public String getEmail() {
 		return email;

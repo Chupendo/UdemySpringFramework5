@@ -54,7 +54,9 @@ public class IndexController {
 	public String listar(Model model) {
 		_log.info("Start handler LISTAR");
 		List<Usuario> usuarios = new ArrayList<>();
-
+		usuarios.add(new Usuario("Andres","Ruiz","andres@correo.com"));
+		usuarios.add(new Usuario("John","Doe","john@correo.com"));
+		usuarios.add(new Usuario("Jane","Doe","jane@correo.com"));
 		
 		model.addAttribute("titulo", "Listado de Usuarios");
 		model.addAttribute("usuarios", usuarios);
