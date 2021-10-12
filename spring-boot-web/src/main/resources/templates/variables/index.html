@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Recibir parámetros de la ruta (PatchVariable)</title>
+</head>
+<body>
+	<h1 th:text="'Recibir parámetros de la ruta (PatchVariable)'"></h1>
+	<a th:href="@{/variables/string/'Hola Andrés!'}">Enviar texto=Hola
+		Andrés! a /variables/string/Hola Andrés!</a>
+	<br>
+	<a th:href="@{/variables/string/'Hola Jhon!'}">Enviar texto=Hola
+		Andrés! a /variables/string/Hola Jhon!</a>
+	<br>
+	<a th:href="@{/variables/string/'Hola Andrés!'/3}">Enviar
+		texto=Hola Andrés! y numero=3 a /variables/string/Hola Andrés!/3</a>
+	<br>
+</body>
+</html>
