@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/> <!-- Comprobar que el encodig del fichero sea el mismo -> click derecho sobre index.html>propieades -->
+<meta charset="utf-8" />
+<!-- Comprobar que el encodig del fichero sea el mismo -> click derecho sobre index.html>propieades -->
 <title th:text="${titulo}">Insert title here</title>
+
+<!-- Carga estilo CSS -->
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+<!-- Carga de ficheros scritp: https://www.neoguias.com/scripts-async-defer/ -->
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+<script async type="text/javascript" th:src="@{/js/script.js}"></script>
+<script defer type="text/javascript" th:src="@{/js/script.js}"></script>
 </head>
 <body>
-	<h1 th:text="titulo">Título principal de la página</h1>
+	<h1 th:text="titulo" class="color-rojo"></h1>
+	<h2 class="color-azul">Decorando con estilos css recuros estáticos</h2>
+	<img alt="Imange Estatica" th:src="@{/images/spring.jfif}">
 </body>
 </html>
