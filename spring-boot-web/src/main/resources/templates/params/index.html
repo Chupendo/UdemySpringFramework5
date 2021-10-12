@@ -5,9 +5,17 @@
 <title>Enviar parámetros del Request HTTP GET - URL</title>
 </head>
 <body>
-<h1 th:text="'Enviar parámetros del Request HTTP GET - URL'"></h1>
-<a th:href="@{/params/string(texto='Hola desde index.html')}">Enviar texto a /params/string?texto='Hola desde index.html'</a>
-<br>
-<a th:href="@{/params/string(texto='Que tal Jhon!')}">Enviar texto a /params/string?texto='Que tal Jhon!'</a>
+	<h1 th:text="'Enviar parámetros del Request HTTP GET - URL'"></h1>
+	<a th:href="@{/params/string(texto='Hola desde index.html')}">Enviar
+		texto a /params/string?texto='Hola desde index.html'</a>
+	<br>
+	<a th:href="@{/params/string(texto='Que tal Jhon!')}">Enviar texto
+		a /params/string?texto='Que tal Jhon!'</a>
+	<br>
+	<a th:href="@{/params/mix-params(saludo='Que tal Andrés!',numero=3)}">Enviar
+		texto a /params/mix-params?saludo='Que tal Andrés!'&numero=7</a>
+	<br>
+	<a th:href="@{/params/mix-params-request(saludo='Que tal Andrés!',numero=3)}">Enviar
+		texto a /params/mix-params?saludo='Que tal Andrés!'&numero=7</a>
 </body>
 </html>
