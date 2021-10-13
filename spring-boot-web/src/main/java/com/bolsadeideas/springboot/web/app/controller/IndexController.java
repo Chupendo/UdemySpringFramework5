@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,14 +20,28 @@ import com.bolsadeideas.springboot.web.app.model.Usuario;
 public class IndexController {
 	private static Logger _log = LoggerFactory.getLogger(IndexController.class.toString());
 	
-	//Métodos de acción o Handlers
+	@Value("${texto.indexcontroller.index.titulo}")
+	private String textoIndex;
+	@Value("${texto.indexcontroller.index.perfil}")
+	private String textoPerfil;
+	@Value("${texto.indexcontroller.index.listar}")
+	private String textoListar;
+	
+	//Variavle del sistema y valor por defecto
+	@Value("${java.home}")
+	private String java;
+	
+	@Value("${username:Andres}")
+	private String userName;
+	
+
 	
 	@RequestMapping(value = {"/","/index","home"},method = RequestMethod.GET) //@GetMapping({"/","/index","home"})
 	public String index(Model model) {
 		_log.info("Start handler INDEX");
 		
 		//Agregramos datos a la vista como un mapa de valores {key,value}
-		model.addAttribute("titulo","Hola Spring Framework! con Model");
+		model.addAttribute("titulo",textoIndex);
 		//nombre de la vista
 		return "index";
 	}
@@ -44,7 +59,7 @@ public class IndexController {
 		_log.debug("usuario: "+usuario);
 		
 		//Se lo pasamso a la vista para que esta los redenderice
-		model.addAttribute("titulo", "Perfil del usuario: "+usuario.getNombre());
+		model.addAttribute("titulo", textoPerfil+usuario.getNombre());
 		
 		//Devolvemos la vista
 		return "perfil";
@@ -59,7 +74,7 @@ public class IndexController {
 		usuarios.add(new Usuario("John","Doe","john@correo.com"));
 		usuarios.add(new Usuario("Jane","Doe","jane@correo.com"));
 		*/
-		model.addAttribute("titulo", "Listado de Usuarios");
+		model.addAttribute("titulo", textoListar);
 		//model.addAttribute("usuarios", usuarios);
 		return "listar";
 	}
@@ -68,6 +83,9 @@ public class IndexController {
 	public List<Usuario> poblarUsuarios(){
 		_log.info("Start handler POBLARUSUARIOS");
 		List<Usuario> usuarios = new ArrayList<>();
+		
+		//usuarios.add(this.users.get(0));
+
 		usuarios.add(new Usuario("Andres","Ruiz","andres@correo.com"));
 		usuarios.add(new Usuario("John","Doe","john@correo.com"));
 		usuarios.add(new Usuario("Jane","Ruth","jane@correo.com"));
