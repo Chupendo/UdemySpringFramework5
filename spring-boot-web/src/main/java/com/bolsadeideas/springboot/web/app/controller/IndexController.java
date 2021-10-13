@@ -79,13 +79,13 @@ public class IndexController {
 		return "listar";
 	}
 	
+	//Parametros que estan presentes en todos los metodos Handerl del Controlador
 	@ModelAttribute("usuarios")
 	public List<Usuario> poblarUsuarios(){
 		_log.info("Start handler POBLARUSUARIOS");
 		List<Usuario> usuarios = new ArrayList<>();
 		
 		//usuarios.add(this.users.get(0));
-
 		usuarios.add(new Usuario("Andres","Ruiz","andres@correo.com"));
 		usuarios.add(new Usuario("John","Doe","john@correo.com"));
 		usuarios.add(new Usuario("Jane","Ruth","jane@correo.com"));
