@@ -1,21 +1,28 @@
 package com.bolsadeideas.springboot.di.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.bolsadeideas.springboot.di.app.models.service.IServicio;
 import com.bolsadeideas.springboot.di.app.models.service.MiServicio;
 
 @Controller
 public class IndexController {
 	
-	//Acople de una clase "service" al contralo
+	//Acople de una clase "service" al contralor
 	//private MiServicio servicio = new MiServicio();
 	
-	//Inyección de depenencias
-	@Autowired
-	private MiServicio servicio;
+	//Inyección de dependencias(ID) DTO
+	//@Autowired
+	//private MiServicio servicio;
+	
+	//Inyección de dependencias por interfaz
+	@Autowired //por defecto coge la primea que encuentre anotada con componete e implemente la intefaz
+	@Qualifier("miServicioSimple") 
+	private IServicio servicio;
 	
 	@GetMapping(value= {"","/","index","home"})
 	public String index(Model model) {
