@@ -25,13 +25,22 @@ public class IndexController {
 	//private IServicio servicio;
 	
 	//Inyección de dependencias de la interfaz de servicio por método setter
+	/*
 	private IServicio servicio;
 	
 	@Autowired
 	public void setServicio(IServicio servicio) {
 		this.servicio = servicio;
 	}
-
+	*/
+	//Inyección de dependencias de la interfaz de servicio por constructor
+	private IServicio servicio;
+	
+	@Autowired //Anotación opcional, vara ID del servicio primario vía constructor 
+	public IndexController(IServicio servicio) {
+		this.servicio=servicio;
+	}
+		
 	@GetMapping(value= {"","/","index","home"})
 	public String index(Model model) {
 		
