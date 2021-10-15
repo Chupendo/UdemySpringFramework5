@@ -14,6 +14,7 @@ public class IndexController {
 	
 	//Inyección de dependencias por interfaz
 	@Autowired //por defecto coge la primea que encuentre anotada con componete e implemente la intefaz
+	@Qualifier("miServicioComplejo")
 	private IServicio servicio;
 	
 		
