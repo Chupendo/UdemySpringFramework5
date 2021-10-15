@@ -20,10 +20,18 @@ public class IndexController {
 	//private MiServicio servicio;
 	
 	//Inyección de dependencias por interfaz
-	@Autowired //por defecto coge la primea que encuentre anotada con componete e implemente la intefaz
-	@Qualifier("miServicioSimple") 
+	//@Autowired //por defecto coge la primea que encuentre anotada con componete e implemente la intefaz
+	//@Qualifier("miServicioSimple") 
+	//private IServicio servicio;
+	
+	//Inyección de dependencias de la interfaz de servicio por método setter
 	private IServicio servicio;
 	
+	@Autowired
+	public void setServicio(IServicio servicio) {
+		this.servicio = servicio;
+	}
+
 	@GetMapping(value= {"","/","index","home"})
 	public String index(Model model) {
 		
