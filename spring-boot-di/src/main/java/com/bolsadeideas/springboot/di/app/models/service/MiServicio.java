@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Component("miServicioSimple")
-@Primary
+//@Component("miServicioSimple")
+//@Primary
 //@Service
 public class MiServicio implements IServicio{
 	//Si hubiera un constructor con parámetros se debe crear uno por defecto (Sin parámetros) de lo contrario daría error al crear la instancia por parte del contenedor de dependencias de spring.
