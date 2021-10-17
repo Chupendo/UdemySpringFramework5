@@ -2,6 +2,9 @@ package com.bolsadeideas.springboot.di.app.models.domain;
 
 import java.util.Objects;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Cliente {
 	private String nombre;
 	private String apellido;

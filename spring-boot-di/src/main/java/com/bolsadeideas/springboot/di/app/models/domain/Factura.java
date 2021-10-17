@@ -3,6 +3,9 @@ package com.bolsadeideas.springboot.di.app.models.domain;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Factura {
 	private String descripcion;
 	//Relaciona la Factura con el cliente (Relación Cliente)
