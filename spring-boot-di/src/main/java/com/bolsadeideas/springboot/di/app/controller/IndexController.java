@@ -11,18 +11,18 @@ import com.bolsadeideas.springboot.di.app.models.service.MiServicio;
 
 @Controller
 public class IndexController {
-	
-	//Inyección de dependencias por interfaz
-	@Autowired //por defecto coge la primea que encuentre anotada con componete e implemente la intefaz
+
+	// Inyección de dependencias por interfaz
+	@Autowired // por defecto coge la primea que encuentre anotada con componete e implemente
+				// la intefaz
 	@Qualifier("miServicioComplejo")
 	private IServicio servicio;
-	
-		
-	@GetMapping(value= {"","/","index","home"})
+
+	@GetMapping(value = { "", "/", "index", "home" })
 	public String index(Model model) {
-		
-		//Pasmos a la vista el resutlado de la operaicon del dato que fuimos a buscar
-		model.addAttribute("objeto",servicio.operacion());
+
+		// Pasmos a la vista el resutlado de la operaicon del dato que fuimos a buscar
+		model.addAttribute("objeto", servicio.operacion());
 		return "index";
 	}
 }
