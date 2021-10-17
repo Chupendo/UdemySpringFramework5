@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Factura {
+	@Value("factura.descripcion")
 	private String descripcion;
 	// Relaciona la Factura con el cliente (Relación Cliente)
 	// Tipo relacion >> <Cliente>:<Factura> --> 1:N Un cliente puede tener muchas
