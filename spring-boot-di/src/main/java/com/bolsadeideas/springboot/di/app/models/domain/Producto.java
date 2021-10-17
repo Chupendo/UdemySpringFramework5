@@ -6,6 +6,14 @@ public class Producto {
 	private String nombre;
 	private Integer precio;
 
+	
+	
+	public Producto(String nombre, Integer precio) {
+		super();
+		this.nombre = nombre;
+		this.precio = precio;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

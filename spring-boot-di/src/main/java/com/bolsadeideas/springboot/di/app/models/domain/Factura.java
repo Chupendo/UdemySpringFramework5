@@ -20,6 +20,7 @@ public class Factura {
 	// Relaciona la factura con el producto (Relación ItemFactura)
 	// Tipo relacion >> <Factura>:<Prodcuto> --> 1:1 Una factura puede contener
 	// muchos, pocos o ningun producto
+	@Autowired
 	private List<ItemFactura> items;
 
 	public String getDescripcion() {
