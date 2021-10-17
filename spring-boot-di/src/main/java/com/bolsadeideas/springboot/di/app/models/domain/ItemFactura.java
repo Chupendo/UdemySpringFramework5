@@ -45,6 +45,8 @@ public class ItemFactura {
 		return "ItemFactura [producto=" + producto + ", cantidad=" + cantidad + "]";
 	}
 	
-	
+	public Integer calcularImporte() {
+		return cantidad * producto.getPrecio();
+	}
 
 }
