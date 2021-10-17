@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Factura {
-	@Value("factura.descripcion")
+	@Value("${factura.descripcion:default}")
 	private String descripcion;
 	// Relaciona la Factura con el cliente (Relación Cliente)
 	// Tipo relacion >> <Cliente>:<Factura> --> 1:N Un cliente puede tener muchas

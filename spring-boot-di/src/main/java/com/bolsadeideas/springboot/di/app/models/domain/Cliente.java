@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Cliente {
-	@Value("${cliente.nombre")
+	@Value("${cliente.nombre:default}")
 	private String nombre;
-	@Value("${cliente.apellido")
+	@Value("${cliente.apellido:default}")
 	private String apellido;
 
 	public String getNombre() {
