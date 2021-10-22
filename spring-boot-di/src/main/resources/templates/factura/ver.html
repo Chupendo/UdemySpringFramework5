@@ -13,7 +13,7 @@
 		<span th:text="${factura.cliente.nombre+' '+factura.cliente.apellido}"></span>
 		 -->
 		<span
-			th:text="${factura.cliente.nombre}+' '+${factura.cliente.apellido}"></span>
+			th:utext="${factura.cliente.nombre}+' '+${factura.cliente.apellido}"></span>
 	</div>
 	<table>
 		<thead>
@@ -24,9 +24,9 @@
 		</thead>
 		<tbody>
 			<tr th:each="item: ${factura.items}">
-				<td th:text="${item.producto.nombre}"></td>
-				<td th:text="${item.producto.precio}"></td>
-				<td th:text="${item.cantidad}"></td>
+				<td th:utext="${item.producto.nombre}"></td>
+				<td th:utext="${item.producto.precio}"></td>
+				<td th:utext="${item.cantidad}"></td>
 				<!--  
 				<td th:text="${item.cantidad * item.producto.precio}"></td>
 				-->
