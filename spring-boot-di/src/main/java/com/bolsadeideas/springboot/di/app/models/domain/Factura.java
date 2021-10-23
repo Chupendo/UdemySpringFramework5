@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Component
+@RequestScope
 public class Factura {
 	@Value("${factura.descripcion:default}")
 	private String descripcion;
@@ -32,14 +34,14 @@ public class Factura {
 	@PostConstruct
 	public void inicializar() {
 		//Ejemplo de modifcición de a atritubos una vez creado el componente en el contendor de Spring
-		cliente.setNombre(cliente.getApellido().concat(" ").concat("Francisco"));
+		cliente.setNombre(cliente.getNombre().concat(" ").concat("Francisco"));
 		descripcion =descripcion.concat(" del cliente: ").concat(cliente.getNombre());
 	}
 	
 	//Ejemplo de la anotacion PreDestroy
 	@PreDestroy
 	public void destruir() {
-		System.out.println("Factura Destruida!");
+		System.out.println("Factura Destruida: "+descripcion);
 	}
 	
 	public String getDescripcion() {
