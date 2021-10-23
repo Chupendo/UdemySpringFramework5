@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,6 +34,12 @@ public class Factura {
 		//Ejemplo de modifcición de a atritubos una vez creado el componente en el contendor de Spring
 		cliente.setNombre(cliente.getApellido().concat(" ").concat("Francisco"));
 		descripcion =descripcion.concat(" del cliente: ").concat(cliente.getNombre());
+	}
+	
+	//Ejemplo de la anotacion PreDestroy
+	@PreDestroy
+	public void destruir() {
+		System.out.println("Factura Destruida!");
 	}
 	
 	public String getDescripcion() {
