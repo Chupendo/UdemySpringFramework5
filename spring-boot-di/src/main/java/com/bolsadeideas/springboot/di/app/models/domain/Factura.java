@@ -3,7 +3,10 @@ package com.bolsadeideas.springboot.di.app.models.domain;
 import java.util.List;
 import java.util.Objects;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +24,17 @@ public class Factura {
 	// Tipo relacion >> <Factura>:<Prodcuto> --> 1:1 Una factura puede contener
 	// muchos, pocos o ningun producto
 	@Autowired
+	@Qualifier("itemsFactura")
 	private List<ItemFactura> items;
 
+	// Ejemplo de la anotación PostConstruct
+	@PostConstruct
+	public void inicializar() {
+		//Ejemplo de modifcición de a atritubos una vez creado el componente en el contendor de Spring
+		cliente.setNombre(cliente.getApellido().concat(" ").concat("Francisco"));
+		descripcion =descripcion.concat(" del cliente: ").concat(cliente.getNombre());
+	}
+	
 	public String getDescripcion() {
 		return descripcion;
 	}
