@@ -1,5 +1,6 @@
 package com.bolsadeideas.springboot.di.app.models.domain;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,10 +12,19 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.context.annotation.SessionScope;
 
 @Component
-@RequestScope
-public class Factura {
+//@RequestScope
+@SessionScope
+public class Factura implements Serializable {
+	/**
+	 * Atributo statio, para manejar la sesion a nivel inferior,
+	 * no tiene impacto para nuestro codigo
+	 */
+	private static final long serialVersionUID = -8536465915406702238L;
+	
+	
 	@Value("${factura.descripcion:default}")
 	private String descripcion;
 	// Relaciona la Factura con el cliente (Relación Cliente)
