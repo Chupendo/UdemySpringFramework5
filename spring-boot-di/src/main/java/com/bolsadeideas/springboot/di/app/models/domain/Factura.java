@@ -15,14 +15,14 @@ import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 
 @Component
-//@RequestScope
-@SessionScope
+@RequestScope
+//@SessionScope
 public class Factura implements Serializable {
 	/**
 	 * Atributo statio, para manejar la sesion a nivel inferior,
 	 * no tiene impacto para nuestro codigo
 	 */
-	private static final long serialVersionUID = -8536465915406702238L;
+	//private static final long serialVersionUID = -8536465915406702238L;
 	
 	
 	@Value("${factura.descripcion:default}")
