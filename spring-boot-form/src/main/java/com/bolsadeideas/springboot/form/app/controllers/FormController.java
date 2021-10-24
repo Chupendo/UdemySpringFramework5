@@ -36,6 +36,8 @@ public class FormController {
 			BindingResult result,
 			Model model) {
 		
+		//Trabajo manual y explicita de los errores
+		/*
 		if(result.hasErrors()) {
 			//Si existe errores de validacion, entonces enviamos por ejemplo los mensajes de error
 			//Mapa {atributo con error,mensaje} que recoge los menjaes de errores FieldErros
@@ -51,12 +53,17 @@ public class FormController {
 						.concat(err.getCode())
 						);
 			});
-			
+		 
 			//Enviamos los mensajesde la vista del formulario
 			model.addAttribute("error",errores);
 			return "form";
 		}
+		*/
 		
+		//Trabajo automática e implicita de los errores con Thymelaf y Spring, en la vista
+		if(result.hasErrors()) {
+			return "form";
+		}
 		//Si no hay errores, se procesan los datos
 		model.addAttribute("titulo", "Resultado form");
 		model.addAttribute("usuario", usuario);

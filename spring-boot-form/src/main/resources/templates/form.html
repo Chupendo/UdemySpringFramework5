@@ -12,23 +12,32 @@
 			<input id="username" type="text" th:field="*{username}"/>
 		</div>
 		<!--  Mostramos el mensaje de error (que es un mapa) si exisitera, Opción map.get() -->
-		<div th:if="${error != null && error.containsKey('username')}" 
-		th:text="${error.get('username')}"></div>
+		<!--
+		<div th:if="${error != null && error.containsKey('username')}"
+			th:text="${error.get('username')}"></div>
+		-->	
+		<!--  Mostramso el mensaje de error a través de un objeto utilidad o helper -->
+		<div th:if="${#fields.hasErrors('username')}" 
+			th:errors="*{username}"></div>
 		
 		<label for="password">Password</label>
 		<div>
 			<input name="password" id="password" type="password"/>
 		</div>
 		<!--  Mostramos el mensaje de error (que es un mapa) si exisitera, Opción map.key de Thymeleaf -->
-		<div th:if="${error != null && error.containsKey('password')}"></div>
+		<!--  <div th:if="${error != null && error.containsKey('password')}"></div> -->
+		<div th:if="${#fields.hashErrors('password')" th:errors="*{password}"}/>
 		
 		<label for="email">Email</label>
 		<div>
 			<input id="email" type="text" th:field="*{email}"/>
 		</div>
 				
-		<div th:if="${error != null && error.containsKey('email')}" th:text="${error.email}"></div>
-		
+		<!--  <div th:if="${error != null && error.containsKey('email')}" th:text="${error.email}"></div> -->
+		<div th:if="${#fields.hasErrors('email)}" 
+			th:errors="*{email}"></div>
+			
+			
 		<div>
 			<input value="Enviar" type="submit" />
 		</div>
