@@ -21,7 +21,7 @@ public class FormController {
 
 	//Procesa la peticion de tipo post que va a form, para obtener los datos.
 	@PostMapping("/form")
-	public String leerFormuario(Usuario usuario,
+	public String leerFormulario(Usuario usuario,
 			Model model) {
 		
 		model.addAttribute("titulo", "Resutlado form");
