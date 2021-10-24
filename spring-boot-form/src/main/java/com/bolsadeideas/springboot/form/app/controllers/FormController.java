@@ -23,8 +23,11 @@ public class FormController {
 	public String obtenerFormulario(Model model) {
 		model.addAttribute("titulo", "Formulario usuarios");
 		
-		//enviar un objeto vacio tipo usuario, se puede usar el operador '?' como alternativa en el value de los input para que no de error
-		model.addAttribute("user",new Usuario());
+		//Enviamso al formulario un usuario  con datos por defecto
+		Usuario usuario = new Usuario();
+		usuario.setNombre("Andres");
+		usuario.setApellido("Ruiz");
+		model.addAttribute("user",usuario);
 		
 		return "form";
 	}
