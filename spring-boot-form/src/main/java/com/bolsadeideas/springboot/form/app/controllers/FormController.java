@@ -24,7 +24,7 @@ public class FormController {
 		model.addAttribute("titulo", "Formulario usuarios");
 		
 		//enviar un objeto vacio tipo usuario, se puede usar el operador '?' como alternativa en el value de los input para que no de error
-		//model.addAttribute("user",new Usuario());
+		model.addAttribute("user",new Usuario());
 		
 		return "form";
 	}

@@ -6,14 +6,14 @@
 </head>
 <body>
 	<h3 th:text="${titulo}">Título principal de la página</h3>
-	<form th:action="@{/form}" method="post">
+	<form th:action="@{/form}" method="post" th:object="${user}">
 		<label for="username">Username</label>
 		<div>
-			<input name="username" id="username" type="text" />
+			<input id="username" type="text" th:field="*{username}"/>
 		</div>
 		<!--  Mostramos el mensaje de error (que es un mapa) si exisitera, Opción map.get() -->
 		<div th:if="${error != null && error.containsKey('username')}" 
-		th:text="${error.get('username')}" th:value="${user?.username}"></div>
+		th:text="${error.get('username')}"></div>
 		
 		<label for="password">Password</label>
 		<div>
@@ -24,7 +24,7 @@
 		
 		<label for="email">Email</label>
 		<div>
-			<input name="email" id="email" type="text" th:value="${user?.email}"/>
+			<input id="email" type="text" th:field="*{email}"/>
 		</div>
 				
 		<div th:if="${error != null && error.containsKey('email')}" th:text="${error.email}"></div>
