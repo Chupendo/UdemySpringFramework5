@@ -21,16 +21,14 @@ public class FormController {
 
 	//Procesa la peticion de tipo post que va a form, para obtener los datos.
 	@PostMapping("/form")
-	public String leerFormuario(Model model,
-			@RequestParam(name = "username") String username,
-			@RequestParam(value = "password") String pwd,
-			@RequestParam String email) {
+	public String leerFormuario(Usuario usuario,
+			Model model//,@RequestParam(name = "username") String username, @RequestParam(value = "password") String pwd, @RequestParam String email
+			) {
 		
-		Usuario usuario = new Usuario();
-		
-		usuario.setUsername(username);
-		usuario.setPassword(pwd);
-		usuario.setEmail(email);
+		//Usuario usuario = new Usuario();
+		//usuario.setUsername(username);
+		//usuario.setPassword(pwd);
+		//usuario.setEmail(email);
 		
 		model.addAttribute("titulo", "Resutlado form");
 		model.addAttribute("usuario", usuario);
