@@ -25,6 +25,7 @@ public class FormController {
 		
 		//Enviamso al formulario un usuario  con datos por defecto
 		Usuario usuario = new Usuario();
+		usuario.setIdentificador("123.456.789.K");
 		usuario.setNombre("Andres");
 		usuario.setApellido("Ruiz");
 		model.addAttribute("user",usuario);
@@ -51,7 +52,7 @@ public class FormController {
 				//Mapeamoss la listade FieldErrores
 				errores.put(err.getField(), 
 						"El campo "
-						.concat(err.getField())
+						.concat(erretField())
 						.concat(" ")
 						.concat(err.getCode())
 						);
