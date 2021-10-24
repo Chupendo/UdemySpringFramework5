@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,7 +24,7 @@ public class FormController {
 		model.addAttribute("titulo", "Formulario usuarios");
 		
 		//enviar un objeto vacio tipo usuario, se puede usar el operador '?' como alternativa en el value de los input para que no de error
-		//model.addAttribute("usuario",new Usuario());
+		//model.addAttribute("user",new Usuario());
 		
 		return "form";
 	}
@@ -31,7 +32,7 @@ public class FormController {
 
 	//Procesa la peticion de tipo post que va a form, para obtener los datos.
 	@PostMapping("/form")
-	public String leerFormulario(@Valid Usuario usuario,
+	public String leerFormulario(@Valid @ModelAttribute("user") Usuario usuario,
 			BindingResult result,
 			Model model) {
 		
