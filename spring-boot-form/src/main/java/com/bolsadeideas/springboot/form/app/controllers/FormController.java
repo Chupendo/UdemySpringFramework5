@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.bolsadeideas.springboot.form.app.model.domain.Usuario;
 
 @Controller
+@SessionAttributes("user")
 public class FormController {
 
 	//Procesa la peticion de tipo get que va a form, para devolver el formualrio con los datos a procesar por otro handler.
@@ -38,7 +41,8 @@ public class FormController {
 	@PostMapping("/form")
 	public String leerFormulario(@Valid @ModelAttribute("user") Usuario usuario,
 			BindingResult result,
-			Model model) {
+			Model model,
+			SessionStatus status) {
 		
 		//Trabajo manual y explicita de los errores
 		/*
@@ -71,7 +75,9 @@ public class FormController {
 		//Si no hay errores, se procesan los datos
 		model.addAttribute("titulo", "Resultado form");
 		model.addAttribute("usuario", usuario);
-		
+
+		//Elimianos el objeto de las sision
+		status.setComplete();
 		return "resultado";
 	}
 }
