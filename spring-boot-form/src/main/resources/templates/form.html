@@ -26,7 +26,8 @@
 		</div>
 		<!--  Mostramos el mensaje de error (que es un mapa) si exisitera, Opción map.key de Thymeleaf -->
 		<!--  <div th:if="${error != null && error.containsKey('password')}"></div> -->
-		<div th:if="${#fields.hashErrors('password')" th:errors="*{password}"}/>
+		<div th:if="${#fields.hasErrors('password')}" 
+			th:errors="*{password}"></div>
 		
 		<label for="email">Email</label>
 		<div>
@@ -34,7 +35,7 @@
 		</div>
 				
 		<!--  <div th:if="${error != null && error.containsKey('email')}" th:text="${error.email}"></div> -->
-		<div th:if="${#fields.hasErrors('email)}" 
+		<div th:if="${#fields.hasErrors('email')}" 
 			th:errors="*{email}"></div>
 			
 			
