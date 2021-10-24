@@ -12,18 +12,19 @@
 			<input name="username" id="username" type="text" />
 		</div>
 		<!--  Mostramos el mensaje de error (que es un mapa) si exisitera, Opción map.get() -->
-		<div th:if="${error != null && error.containsKey('username')}" th:text="${error.get('username')}"></div>
+		<div th:if="${error != null && error.containsKey('username')}" 
+		th:text="${error.get('username')}" th:value="${usuario?.username}"></div>
 		
 		<label for="password">Password</label>
 		<div>
-			<input name="password" id="password" type="password" />
+			<input name="password" id="password" type="password"/>
 		</div>
 		<!--  Mostramos el mensaje de error (que es un mapa) si exisitera, Opción map.key de Thymeleaf -->
-		<div th:if="${error != null && error.containsKey('password')}" th:text="${error.password}"></div>
+		<div th:if="${error != null && error.containsKey('password')}"></div>
 		
 		<label for="email">Email</label>
 		<div>
-			<input name="email" id="email" type="text" />
+			<input name="email" id="email" type="text" th:value="${usuario?.email}"/>
 		</div>
 				
 		<div th:if="${error != null && error.containsKey('email')}" th:text="${error.email}"></div>
