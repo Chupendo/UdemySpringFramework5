@@ -2,7 +2,9 @@ package com.bolsadeideas.springboot.form.app.model.domain;
 
 import java.util.Objects;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 public class Usuario {
 
@@ -14,10 +16,14 @@ public class Usuario {
 	private String apellido;
 	
 	@NotEmpty //Valida que nos sea vacio
+	@Size(min=3, max=8)
 	private String username;
 	
 	@NotEmpty //Valida que no sea vacio "requerido"
 	private String password;
+	
+	@NotEmpty
+	@Email
 	private String email;
 	
 	
@@ -78,8 +84,11 @@ public class Usuario {
 	}
 	@Override
 	public String toString() {
-		return "Usuario [username=" + username + ", password=" + password + ", email=" + email + "]";
+		return "Usuario [identificador=" + identificador + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", username=" + username + ", password=" + password + ", email=" + email + "]";
 	}
+	
+	
 	
 	
 }
