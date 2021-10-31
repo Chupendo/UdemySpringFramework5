@@ -10,7 +10,7 @@ public class Usuario {
 
 	private String identificador;
 	
-	@NotEmpty(message = "el nombre no puede ser vacio")
+	@NotEmpty(message = "el nombre no puede ser vacio") //message es remplazado por el NotEmpty de messages.properties
 	private String nombre;
 	@NotEmpty
 	private String apellido;
