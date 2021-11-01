@@ -4,10 +4,12 @@ import java.util.Objects;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class Usuario {
 
+	@Pattern(regexp = "[0-9]{2}[.,][\\d]{3}[.,][\\d][-][a-zA-Z]{1}")
 	private String identificador;
 	
 	@NotEmpty(message = "el nombre no puede ser vacio") //message es remplazado por el NotEmpty de messages.properties

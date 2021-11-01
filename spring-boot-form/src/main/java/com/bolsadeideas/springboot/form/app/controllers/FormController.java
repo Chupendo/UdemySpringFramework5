@@ -49,32 +49,10 @@ public class FormController {
 			Model model) {
 		
 		_LOGG.info("[leerFormulario] user recived: "+usuario.toString());
-		//Trabajo manual y explicita de los errores
-		/*
-		if(result.hasErrors()) {
-			//Si existe errores de validacion, entonces enviamos por ejemplo los mensajes de error
-			//Mapa {atributo con error,mensaje} que recoge los menjaes de errores FieldErros
-			Map<String,String> errores = new HashMap<>();
-			
-			//Recogemos los errores para cada atributo de una lista 
-			result.getFieldErrors().forEach(err->{
-				//Mapeamoss la listade FieldErrores
-				errores.put(err.getField(), 
-						"El campo "
-						.concat(erretField())
-						.concat(" ")
-						.concat(err.getCode())
-						);
-			});
-		 
-			//Enviamos los mensajesde la vista del formulario
-			model.addAttribute("error",errores);
-			return "form";
-		}
-		*/
 		
 		//Trabajo automática e implicita de los errores con Thymelaf y Spring, en la vista
 		if(result.hasErrors()) {
+			model.addAttribute("titulo", "Formulario usuarios");
 			return "form";
 		}
 		//Si no hay errores, se procesan los datos
