@@ -47,5 +47,11 @@ public class UsuarioValidador implements Validator {
 			errors.rejectValue("nombre", "NotEmpty.user.nombre");
 		}
 		*/
+		
+		//validar el identificador con expresiones reguales
+		//El objeto String maneja por defecto expresiones reguales mediante el método matches
+		if(usuario.getIdentificador().matches("[0-9]{2}[.][\\d]{3}[.][\\d][-][A-Z]{1}")==false) {
+			errors.rejectValue("identificador", "Pattern.user.identificador");	
+		}
 	}
 }

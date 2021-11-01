@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,11 +19,15 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bolsadeideas.springboot.form.app.model.domain.Usuario;
+import com.bolsadeideas.springboot.form.app.validation.UsuarioValidador;
 
 @Controller
 @SessionAttributes("user")
 public class FormController {
-
+	
+	@Autowired
+	private UsuarioValidador validador;
+	
 	private static Logger _LOGG = LoggerFactory.getLogger(FormController.class);
 	
 	//Procesa la peticion de tipo get que va a form, para devolver el formualrio con los datos a procesar por otro handler.
@@ -49,6 +54,9 @@ public class FormController {
 			Model model) {
 		
 		_LOGG.info("[leerFormulario] user recived: "+usuario.toString());
+		
+		//Validamoss el objeto mediante nuestra clase validadora y registrmoas los errores
+		validador.validate(usuario, result);
 		
 		//Trabajo automática e implicita de los errores con Thymelaf y Spring, en la vista
 		if(result.hasErrors()) {
