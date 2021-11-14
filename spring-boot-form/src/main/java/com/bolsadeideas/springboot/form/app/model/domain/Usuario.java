@@ -3,6 +3,7 @@ package com.bolsadeideas.springboot.form.app.model.domain;
 import java.util.Objects;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -17,7 +18,8 @@ public class Usuario {
 	@NotEmpty
 	private String apellido;
 	
-	@NotEmpty //Valida que nos sea vacio
+	//@NotEmpty //Valida que nos sea vacio
+	@NotBlank //Valida que no sea vacio o no tenga espacios en blanco
 	@Size(min=3, max=8)
 	private String username;
 	
