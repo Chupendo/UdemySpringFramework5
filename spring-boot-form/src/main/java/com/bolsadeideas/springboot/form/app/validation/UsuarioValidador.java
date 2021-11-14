@@ -40,8 +40,9 @@ public class UsuarioValidador implements Validator {
 			//Fields: mismo nombre del atributo en la clase pojo a validar
 			//errorCode: Key del mensaje error registrado en el "messages.properties"
 		//ValidationUtils.rejectIfEmpty(errors, "nombre", "NotEmpty.user.nombre"); //Validar vacío
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "NotEmpty.user.nombre"); //Validar vacío y espacios en blanco
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "NotEmpty.user.nombre"); //Validar vacío y espacios en blanco
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "requerido.user.nombre"); //Validar vacío y espacios en blanco con mensaje personalizado
+		
 		//RejectIfEmpty es lo mismo que usar la estrucutra de control if con isEmpaty
 		/*
 		if(usuario.getNombre().isEmpty()) {

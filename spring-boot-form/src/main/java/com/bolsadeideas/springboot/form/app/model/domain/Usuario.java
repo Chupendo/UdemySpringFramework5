@@ -13,7 +13,8 @@ public class Usuario {
 	//@Pattern(regexp = "[0-9]{2}[.][\\d]{3}[.][\\d][-][A-Z]{1}") //Comentamos para que no se registre el error dos veces si se usa también en la clase validadora personalizada
 	private String identificador;
 	
-	@NotEmpty(message = "el nombre no puede ser vacio") //message es remplazado por el NotEmpty de messages.properties
+	//Comentamos la anotacion para no validar dos veces al validar el campo en nuestra clase UsuarioValidador
+	//@NotEmpty(message = "el nombre no puede ser vacio") //message es remplazado por el NotEmpty de messages.properties
 	private String nombre;
 	@NotEmpty
 	private String apellido;
