@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +29,12 @@ public class FormController {
 	
 	@Autowired
 	private UsuarioValidador validador;
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		//Registramos e inyectamos nuestro validador
+		binder.setValidator(validador);
+	}
 	
 	private static Logger _LOGG = LoggerFactory.getLogger(FormController.class);
 	
@@ -56,7 +64,7 @@ public class FormController {
 		_LOGG.info("[leerFormulario] user recived: "+usuario.toString());
 		
 		//Validamoss el objeto mediante nuestra clase validadora y registrmoas los errores
-		validador.validate(usuario, result);
+		//validador.validate(usuario, result); //Lo automatizamos con @InitBinder
 		
 		//Trabajo automática e implicita de los errores con Thymelaf y Spring, en la vista
 		if(result.hasErrors()) {
