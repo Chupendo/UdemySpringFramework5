@@ -39,8 +39,8 @@ public class UsuarioValidador implements Validator {
 			//Errors: objeto que contiene el mensaje de error
 			//Fields: mismo nombre del atributo en la clase pojo a validar
 			//errorCode: Key del mensaje error registrado en el "messages.properties"
-		ValidationUtils.rejectIfEmpty(errors, "nombre", "NotEmpty.user.nombre");
-		
+		//ValidationUtils.rejectIfEmpty(errors, "nombre", "NotEmpty.user.nombre"); //Validar vacío
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "NotEmpty.user.nombre"); //Validar vacío y espacios en blanco
 		//RejectIfEmpty es lo mismo que usar la estrucutra de control if con isEmpaty
 		/*
 		if(usuario.getNombre().isEmpty()) {
@@ -50,7 +50,7 @@ public class UsuarioValidador implements Validator {
 		
 		//validar el identificador con expresiones reguales
 		//El objeto String maneja por defecto expresiones reguales mediante el método matches
-		if(usuario.getIdentificador().matches("[0-9]{2}[.][\\d]{3}[.][\\d][-][A-Z]{1}")==false) {
+		if(usuario.getIdentificador().matches("[0-9]{2}[.][\\d]{3}[.][\\d]{3}[-][A-Z]{1}")==false) {
 			errors.rejectValue("identificador", "Pattern.user.identificador");	
 		}
 	}
