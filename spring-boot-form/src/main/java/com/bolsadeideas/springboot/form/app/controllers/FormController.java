@@ -33,7 +33,8 @@ public class FormController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		//Registramos e inyectamos nuestro validador
-		binder.setValidator(validador);
+		//binder.setValidator(validador); //Remplaza el validador por defecto con anotaciones por el validador UsuarioValidador
+		binder.addValidators(validador); //Agrega el validador UsuarioValidador
 	}
 	
 	private static Logger _LOGG = LoggerFactory.getLogger(FormController.class);
