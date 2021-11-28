@@ -7,7 +7,7 @@ import org.springframework.validation.Validator;
 
 import com.bolsadeideas.springboot.form.app.model.domain.Usuario;
 
-@Component
+@Component //Requerido para inyectar en el contenedor de spring y poder validar
 public class UsuarioValidador implements Validator {
 
 	@Override
@@ -36,6 +36,7 @@ public class UsuarioValidador implements Validator {
 		//El param target en este caso es de tipo Usuario por lo que hacemos un cast
 		Usuario usuario =(Usuario) target; //Casting
 		*/
+		
 		//validar que el atributo "nombre" no sea vacío >> @NotEmapty
 			//ValidationUtils.rejectIfEmpty(Errors, Fields, ErrorCode);
 			//Errors: objeto que contiene el mensaje de error

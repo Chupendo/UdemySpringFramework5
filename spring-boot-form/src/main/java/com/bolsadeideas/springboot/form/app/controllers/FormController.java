@@ -27,6 +27,7 @@ import com.bolsadeideas.springboot.form.app.validation.UsuarioValidador;
 @SessionAttributes("user")
 public class FormController {
 	
+	//Inyectamos nuestra clase validadora para el usuario
 	@Autowired
 	private UsuarioValidador validador;
 	
@@ -34,8 +35,8 @@ public class FormController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		//Registramos e inyectamos nuestro validador
-		binder.setValidator(validador); //Remplaza el validador por defecto con anotaciones por el validador UsuarioValidador
-		//binder.addValidators(validador); //Agrega el validador UsuarioValidador
+		//binder.setValidator(validador); //Remplaza el validador por defecto con anotaciones por el validador UsuarioValidador (solopermite clases personalidas)
+		binder.addValidators(validador); //Agrega el validador UsuarioValidador (permite usar anotaciones + clases personaliadas)
 	}
 	
 	private static Logger _LOGG = LoggerFactory.getLogger(FormController.class);
