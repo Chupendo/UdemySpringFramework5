@@ -8,9 +8,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.bolsadeideas.springboot.form.app.validation.IdentenficiadorRegex;
+
+
+
 public class Usuario {
 
 	//@Pattern(regexp = "[0-9]{2}[.][\\d]{3}[.][\\d][-][A-Z]{1}") //Comentamos para que no se registre el error dos veces si se usa también en la clase validadora personalizada
+	@IdentenficiadorRegex
 	private String identificador;
 	
 	//Comentamos la anotacion para no validar dos veces al validar el campo en nuestra clase UsuarioValidador

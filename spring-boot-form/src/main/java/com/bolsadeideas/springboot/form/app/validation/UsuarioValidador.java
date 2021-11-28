@@ -18,7 +18,7 @@ public class UsuarioValidador implements Validator {
 	 * @return true si clazz es de tipo Usuario, false resto de casos
 	 */
 	public boolean supports(Class<?> clazz) {
-		//Para validar que el objeto estamos validadno o que vamos a validar corresponde a la clase de tipo Usuario y no otro,
+		//Para validar que el objeto estamos validando o que vamos a validar corresponde a la clase de tipo Usuario y no otro,
 		//se ha de comprobar si la clase Usuario es asignable desde la clase que recibe el metodo como parámetro de entrada
 		return Usuario.class.isAssignableFrom(clazz);
 	}
@@ -31,9 +31,11 @@ public class UsuarioValidador implements Validator {
 	 * @param error:Errors Objeto con la informacion de error, registrada por "Reject Error" de org.springframework.validation.ValidationUtils.
 	 */
 	public void validate(Object target, Errors errors) {
+		//Comentamos para poder usar las anotaciones de validacion en la clase usuario
+		/*
 		//El param target en este caso es de tipo Usuario por lo que hacemos un cast
 		Usuario usuario =(Usuario) target; //Casting
-
+		*/
 		//validar que el atributo "nombre" no sea vacío >> @NotEmapty
 			//ValidationUtils.rejectIfEmpty(Errors, Fields, ErrorCode);
 			//Errors: objeto que contiene el mensaje de error
@@ -42,7 +44,7 @@ public class UsuarioValidador implements Validator {
 		//ValidationUtils.rejectIfEmpty(errors, "nombre", "NotEmpty.user.nombre"); //Validar vacío
 		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "NotEmpty.user.nombre"); //Validar vacío y espacios en blanco
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "requerido.user.nombre"); //Validar vacío y espacios en blanco con mensaje personalizado
-		
+
 		//RejectIfEmpty es lo mismo que usar la estrucutra de control if con isEmpaty
 		/*
 		if(usuario.getNombre().isEmpty()) {
@@ -50,10 +52,14 @@ public class UsuarioValidador implements Validator {
 		}
 		*/
 		
+		//Cometamos eta validacion porque se ha creado una anotación específica para ello
+		/*
 		//validar el identificador con expresiones reguales
 		//El objeto String maneja por defecto expresiones reguales mediante el método matches
 		if(usuario.getIdentificador().matches("[0-9]{2}[.][\\d]{3}[.][\\d]{3}[-][A-Z]{1}")==false) {
 			errors.rejectValue("identificador", "Pattern.user.identificador");	
 		}
+		*/
+		
 	}
 }
