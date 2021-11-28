@@ -21,7 +21,9 @@ public class Usuario {
 	//Comentamos la anotacion para no validar dos veces al validar el campo en nuestra clase UsuarioValidador
 	//@NotEmpty(message = "el nombre no puede ser vacio") //message es remplazado por el NotEmpty de messages.properties
 	private String nombre;
-	@NotEmpty
+	
+	
+	//@NotEmpty
 	private String apellido;
 	
 	//@NotEmpty //Valida que nos sea vacio
