@@ -3,8 +3,11 @@ package com.bolsadeideas.springboot.form.app.model.domain;
 import java.util.Objects;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -39,8 +42,17 @@ public class Usuario {
 	@Email(message = "correo con formato incorrecto")
 	private String email;
 	
+	//Valida que no la propiedad cuenta no sea nulo y este entre 5 y 20
+	@NotNull
+	@Min(5)  //Mínimo 5
+	@Max(20) //Maximo 20
+	private Integer cuenta;
 	
-	
+//	
+//	//Valida que no la propiedad cuenta almenos tenga un dígito
+//	@Min(1) //Mínimo 1 digito
+//	private int cuenta;
+//	
 	public String getIdentificador() {
 		return identificador;
 	}
@@ -78,9 +90,16 @@ public class Usuario {
 		this.email = email;
 	}
 	
+	public Integer getCuenta() {
+		return cuenta;
+	}
+	public void setCuenta(Integer cuenta) {
+		this.cuenta = cuenta;
+	}
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, password, username);
+		return Objects.hash(cuenta, email, identificador, password, username);
 	}
 	
 	@Override
@@ -92,13 +111,14 @@ public class Usuario {
 			return false;
 		}
 		Usuario other = (Usuario) obj;
-		return Objects.equals(email, other.email) && Objects.equals(password, other.password)
+		return Objects.equals(cuenta, other.cuenta) && Objects.equals(email, other.email)
+				&& Objects.equals(identificador, other.identificador) && Objects.equals(password, other.password)
 				&& Objects.equals(username, other.username);
 	}
 	@Override
 	public String toString() {
 		return "Usuario [identificador=" + identificador + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", username=" + username + ", password=" + password + ", email=" + email + "]";
+				+ ", username=" + username + ", password=" + password + ", email=" + email + ", cuenta=" + cuenta + "]";
 	}
 	
 	
