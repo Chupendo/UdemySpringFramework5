@@ -48,10 +48,21 @@ public class FormController {
 		
 		//Enviamso al formulario un usuario  con datos por defecto
 		Usuario usuario = new Usuario();
-		usuario.setIdentificador("123.456.789.K");
-		usuario.setNombre("Andres");
+		//Usuario con errores para comprobar la validacion
+//		usuario.setIdentificador("123.456.789.K"); //Id erroneo, para chek la validacion
+//		usuario.setNombre("Andres");
+//		usuario.setApellido("Ruiz");
+//		_LOGG.info("[obtenerFormulario] user created: "+usuario.toString());
+		
+		//Usuario con todos los datos menos con la fecha de cumpleaños
+		usuario.setIdentificador("11.111.111-A");
 		usuario.setApellido("Ruiz");
+		usuario.setUsername("Chupendo");
+		usuario.setPassword("123"); //El valor de la clave no aparecerá porque el cliente no lo añade
+		usuario.setCuenta(5);
+		usuario.setEmail("aruizpen@form.es");
 		_LOGG.info("[obtenerFormulario] user created: "+usuario.toString());
+		
 		model.addAttribute("user",usuario);
 		
 		return "form";

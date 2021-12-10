@@ -11,7 +11,8 @@
 		<div>
 			<input id="identificador" type="text" th:field="*{identificador}" />
 		</div>
-		<div th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}"></div>
+		<div th:if="${#fields.hasErrors('identificador')}"
+			th:errors="*{identificador}"></div>
 
 		<label for="names">Nombre</label>
 		<div>
@@ -56,10 +57,23 @@
 		<!-- Campo cuenta tipo numerico -->
 		<label id="count">Cuenta</label>
 		<div>
-		<!--  <input id="count" type="text" th:field="*{cuenta}"/> --> <!--  captura como un string -->
-		<input id="count" type="number" th:field="*{cuenta}"/> <!--  captura como un number -->
-		<div th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
+			<!--  <input id="count" type="text" th:field="*{cuenta}"/> -->
+			<!--  captura como un string -->
+			<input id="count" type="number" th:field="*{cuenta}" />
+			<!--  captura como un number -->
+			<div th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
 		</div>
+
+		<!--  Campo para captura la fecha de cumpleaños "birthday" -->
+		<label id="birthday">Fecha de nacimiento:</label>
+		<div>
+			<!--  captura como un string -->
+			<input id="birthday" type="text" th:field="*{birthday}" placeholder="yyy/MM/dd HH:mm:ss" />
+			<!--  captura como un number -->
+			<div th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></div>
+		</div>
+
+
 		<div>
 			<input value="Enviar" type="submit" />
 		</div>

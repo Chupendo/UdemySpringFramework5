@@ -1,5 +1,6 @@
 package com.bolsadeideas.springboot.form.app.model.domain;
 
+import java.util.Date;
 import java.util.Objects;
 
 import javax.validation.constraints.Email;
@@ -48,6 +49,10 @@ public class Usuario {
 	@Max(20) //Maximo 20
 	private Integer cuenta;
 	
+	//
+	@NotNull //Comprueba que el campo no sea vacío
+	//@Size(min=3, max=8) //No soportada para objetos de tipo Date
+	private Date birthday; //Atributo para alamacenar de una Fecha, objeto de java.util
 //	
 //	//Valida que no la propiedad cuenta almenos tenga un dígito
 //	@Min(1) //Mínimo 1 digito
@@ -97,6 +102,12 @@ public class Usuario {
 		this.cuenta = cuenta;
 	}
 	
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(cuenta, email, identificador, password, username);
@@ -118,7 +129,8 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [identificador=" + identificador + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", username=" + username + ", password=" + password + ", email=" + email + ", cuenta=" + cuenta + "]";
+				+ ", username=" + username + ", password=" + password + ", email=" + email + ", cuenta=" + cuenta
+				+ ", birthday=" + birthday + "]";
 	}
 	
 	
