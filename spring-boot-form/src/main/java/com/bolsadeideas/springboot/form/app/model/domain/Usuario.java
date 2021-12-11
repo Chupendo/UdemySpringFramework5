@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.bolsadeideas.springboot.form.app.validation.IdentenficiadorRegex;
 import com.bolsadeideas.springboot.form.app.validation.Requerido;
 
@@ -52,6 +54,7 @@ public class Usuario {
 	//
 	@NotNull //Comprueba que el campo no sea vacío
 	//@Size(min=3, max=8) //No soportada para objetos de tipo Date
+	@DateTimeFormat(pattern = "yyy/MM/dd HH:mm:ss") //Patron de formato para la fecha
 	private Date birthday; //Atributo para alamacenar de una Fecha, objeto de java.util
 //	
 //	//Valida que no la propiedad cuenta almenos tenga un dígito
