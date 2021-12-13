@@ -64,15 +64,28 @@
 			<div th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
 		</div>
 
-		<!--  Campo para captura la fecha de cumpleaños "birthday" -->
+		<!--  Campo para captura la fecha de cumpleaños "birthday" como String/Date/Datetime-local-->
 		<label id="birthday">Fecha de nacimiento:</label>
 		<div>
 			<!--  captura como un string -->
+<!-- 
 			<input id="birthday" type="text" th:field="*{birthday}" placeholder="yyy/MM/dd HH:mm:ss" />
-			<!--  captura como un number -->
-			<div th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></div>
+-->
+<!-- 
+			<!--  captura como fecha: -->
+			<!--  OPCION A: captura como un date: solo añade fecha, no añade horas, minutos y segundos -->
+<!-- 
+			<input id="birthday" type="date" th:field="*{birthday}"/>
+-->
+			<input id="birthday" type="datetime-local" th:field="*{birthday}" step="1"/>
+			<!--  OPCION B: captura como un date: solo añade fecha, con horas, minutos y segundos -->
+<!--  			
+			<input id="birthday" type="datetime-local" th:field="*{birthday}" step="1"/>
+-->			
+			<!-- mostrar mensjae mensaje de error si falla al validar la fecha -->
+			<div th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" ></div>
 		</div>
-
+		
 
 		<div>
 			<input value="Enviar" type="submit" />
