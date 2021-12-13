@@ -4,11 +4,13 @@ import java.util.Date;
 import java.util.Objects;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -58,6 +60,8 @@ public class Usuario {
 	//@DateTimeFormat(pattern = "yyy/MM/dd HH:mm:ss") //Patron de formato para la fecha con input tipo text
 	//@DateTimeFormat(pattern = "yyy-MM-dd") //Patron de formato para la fecha con input tipo date: ISO Date Format yyyy-MM-dd — for example,"2000-10-31".
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") //Patron de formato para la fecha con input tipo datetime-local: ISO Date Format yyyy-MM-ddTHH:mm:ss
+	//@Past //Valida si la fecha recibida es pasada al día presente
+	@Future //Valida si la fecha recibida es mayor al día presente
 	private Date birthday; //Atributo para almacenar de una Fecha, objeto de java.util
 //	
 //	//Valida que no la propiedad cuenta almenos tenga un dígito
