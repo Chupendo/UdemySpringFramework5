@@ -54,12 +54,12 @@ public class Usuario {
 	@Max(20) //Maximo 20
 	private Integer cuenta;
 	
-	//
+	//Validado y Formateado con “SimpleDateFormat” (CostumerDateEditor) mediante un InitBinder
 	@NotNull //Comprueba que el campo no sea vacío
 	//@Size(min=3, max=8) //No soportada para objetos de tipo Date
 	//@DateTimeFormat(pattern = "yyy/MM/dd HH:mm:ss") //Patron de formato para la fecha con input tipo text
 	//@DateTimeFormat(pattern = "yyy-MM-dd") //Patron de formato para la fecha con input tipo date: ISO Date Format yyyy-MM-dd — for example,"2000-10-31".
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") //Patron de formato para la fecha con input tipo datetime-local: ISO Date Format yyyy-MM-ddTHH:mm:ss
+	//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") //Patron de formato para la fecha con input tipo datetime-local: ISO Date Format yyyy-MM-ddTHH:mm:ss
 	//@Past //Valida si la fecha recibida es pasada al día presente
 	@Future //Valida si la fecha recibida es mayor al día presente
 	private Date birthday; //Atributo para almacenar de una Fecha, objeto de java.util

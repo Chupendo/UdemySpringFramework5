@@ -1,5 +1,7 @@
 package com.bolsadeideas.springboot.form.app.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +40,14 @@ public class FormController {
 		//Registramos e inyectamos nuestro validador
 		//binder.setValidator(validador); //Remplaza el validador por defecto con anotaciones por el validador UsuarioValidador (solopermite clases personalidas)
 		binder.addValidators(validador); //Agrega el validador UsuarioValidador (permite usar anotaciones + clases personaliadas)
+		
+		//Registramos e inyectamos nuestro editor de fechas (Date) personalizado [Filtro]: alternativa a @DateTimeFormat
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); //Formato de fecha aceptado de "java.text.SimpleDateFormat"
+		dateFormat.setLenient(false);//Permite que el intercpeto "dateFormat" sea tolerante al formato de la fecha recidibo "false" (lo autorrigue si puede, aunque puede generar error) o sea restritivo "true" (debe ser tal cual al definido)
+		//@param Date.class Indicamos que el objeto que recibimos lo convertimos al tipo de dato "java.util.Date"
+		//@param CustomDateEdito() Instancia de un editor de fechas personalizado de "org.springframework.beans.propertyeditors"
+			//con el formato de fecha predefinio y si acepta (true) o no acepta (false) nulos
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 	
 	private static Logger _LOGG = LoggerFactory.getLogger(FormController.class);
