@@ -47,7 +47,8 @@ public class FormController {
 		//@param Date.class Indicamos que el objeto que recibimos lo convertimos al tipo de dato "java.util.Date"
 		//@param CustomDateEdito() Instancia de un editor de fechas personalizado de "org.springframework.beans.propertyeditors"
 			//con el formato de fecha predefinio y si acepta (true) o no acepta (false) nulos
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		//binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false)); //Se aplica a todos los objteso de la clase Date
+		binder.registerCustomEditor(Date.class, "birthday", new CustomDateEditor(dateFormat, false));///Se aplica solo al campo "birthday" del formulario
 	}
 	
 	private static Logger _LOGG = LoggerFactory.getLogger(FormController.class);
