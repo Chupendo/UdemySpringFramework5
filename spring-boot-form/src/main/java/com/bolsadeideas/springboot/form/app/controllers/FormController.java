@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.bolsadeideas.springboot.form.app.editors.NombreMayusculaEditor;
 import com.bolsadeideas.springboot.form.app.model.domain.Usuario;
 import com.bolsadeideas.springboot.form.app.validation.UsuarioValidador;
 
@@ -49,6 +50,11 @@ public class FormController {
 			//con el formato de fecha predefinio y si acepta (true) o no acepta (false) nulos
 		//binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false)); //Se aplica a todos los objteso de la clase Date y no acepta vacíos
 		binder.registerCustomEditor(Date.class, "birthday", new CustomDateEditor(dateFormat, false));///Se aplica solo al campo "birthday" del formulario y acepta vacios
+	
+		//Filtro para convertir a mayusculas
+		//binder.registerCustomEditor(String.class, new NombreMayusculaEditor() );//Se aplica a todos los Stirng
+		binder.registerCustomEditor(String.class, "nombre",new NombreMayusculaEditor() );//Se aplica al campo "nombre"
+		
 	}
 	
 	private static Logger _LOGG = LoggerFactory.getLogger(FormController.class);
