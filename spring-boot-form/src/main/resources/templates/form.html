@@ -86,7 +86,16 @@
 			<div th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" ></div>
 		</div>
 		
-
+		<!-- Lista de paises -->
+		<label id="listPaises">Pais:</label>
+		<select id="listPaises" th:field="*{pais}">
+			<!-- Opcion por defecto -->
+			<option value="">--seleccionar--</option>
+			<!--  Por cada elemento de la lista "paises" lo añade a atributo "pais" y crea una opción, en la cual se va ha mostra el texto de "th:text" y se le va asociar el valor de "th:value"  -->
+			<option th:each="pais: ${paises}" th:text="${pais}" th:value="${pais}"></option>
+		</select>
+		<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}" ></div>
+		
 		<div>
 			<input value="Enviar" type="submit" />
 		</div>

@@ -1,8 +1,11 @@
 package com.bolsadeideas.springboot.form.app.controllers;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.bolsadeideas.springboot.form.app.editors.NombreMayusculaEditor;
 import com.bolsadeideas.springboot.form.app.model.domain.Usuario;
 import com.bolsadeideas.springboot.form.app.validation.UsuarioValidador;
 
@@ -49,6 +53,11 @@ public class FormController {
 			//con el formato de fecha predefinio y si acepta (true) o no acepta (false) nulos
 		//binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false)); //Se aplica a todos los objteso de la clase Date y no acepta vacíos
 		binder.registerCustomEditor(Date.class, "birthday", new CustomDateEditor(dateFormat, false));///Se aplica solo al campo "birthday" del formulario y acepta vacios
+	
+		//Filtro para convertir a mayusculas
+		//binder.registerCustomEditor(String.class, new NombreMayusculaEditor() );//Se aplica a todos los Stirng
+		binder.registerCustomEditor(String.class, "nombre",new NombreMayusculaEditor() );//Se aplica al campo "nombre"
+		
 	}
 	
 	private static Logger _LOGG = LoggerFactory.getLogger(FormController.class);
@@ -77,6 +86,8 @@ public class FormController {
 		
 		model.addAttribute("user",usuario);
 		
+		//Datos de la lista desplebale "paises"- Nota: Se crea un metodo anotado con ModelAtribute
+		model.addAttribute("paises", Arrays.asList("España","Mexico","Chile","Argentian","Perú","Colombia","Venezuela"));
 		return "form";
 	}
 	
@@ -95,6 +106,8 @@ public class FormController {
 		//Trabajo automática e implicita de los errores con Thymelaf y Spring, en la vista
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario usuarios");
+			//Datos de la lista desplebale "paises"- Nota: Se crea un metodo anotado con ModelAtribute
+			//model.addAttribute("paises", Arrays.asList("España","Mexico","Chile","Argentian","Perú","Colombia","Venezuela"));
 			return "form";
 		}
 		//Si no hay errores, se procesan los datos
@@ -102,5 +115,11 @@ public class FormController {
 		model.addAttribute("usuario", usuario);
 		
 		return "resultado";
+	}
+	
+	//Datos a mostar de lista desplegable: paises (por defecto si no se indica el "name", se guarda en el model con el nombre del metodo)
+	@ModelAttribute(value = "paises")
+	public List<String> paises(){
+		return Arrays.asList("España","Mexico","Chile","Argentian","Perú","Colombia","Venezuela");
 	}
 }
