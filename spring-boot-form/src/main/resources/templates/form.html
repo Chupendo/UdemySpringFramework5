@@ -92,7 +92,10 @@
 			<!-- Opcion por defecto -->
 			<option value="">--seleccionar--</option>
 			<!--  Por cada elemento de la lista "paises" lo añade a atributo "pais" y crea una opción, en la cual se va ha mostra el texto de "th:text" y se le va asociar el valor de "th:value"  -->
-			<option th:each="pais: ${paises}" th:text="${pais}" th:value="${pais}"></option>
+			<!--  Recorrer una array list de String -->
+			<!--  <option th:each="pais: ${paises}" th:text="${pais}" th:value="${pais}"></option> -->
+			<!--  Recorrer un mapa<stirng,string> -->
+			<option th:each="pais: ${paisesMap.entrySet()}" th:text="${pais.value}" th:value="${pais.key}"></option>
 		</select>
 		<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}" ></div>
 		
