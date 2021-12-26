@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bolsadeideas.springboot.form.app.editors.NombreMayusculaEditor;
+import com.bolsadeideas.springboot.form.app.model.domain.Pais;
 import com.bolsadeideas.springboot.form.app.model.domain.Usuario;
 import com.bolsadeideas.springboot.form.app.validation.UsuarioValidador;
 
@@ -150,8 +151,8 @@ public class FormController {
 	// Datos a mostar de lista desplegable: paises (por defecto si no se indica el
 	// "name", se guarda en el model con el nombre del metodo)
 	@ModelAttribute(value = "paisesMap")
-	public Map<String,String> paisesMap() {
-		Map<String, String> paises = new HashMap<String,String>();
+	public Map<String, String> paisesMap() {
+		Map<String, String> paises = new HashMap<String, String>();
 		paises.put("ES", "España");
 		paises.put("MX", "Mexico");
 		paises.put("CL", "Chile");
@@ -159,7 +160,21 @@ public class FormController {
 		paises.put("PE", "Perú");
 		paises.put("CO", "Colombia");
 		paises.put("VE", "Venenzuela");
-		
+
 		return paises;
 	}
+
+	// Datos a mostar de lista desplegable: paises 
+	@ModelAttribute(value = "listaPaises")
+	public List<Pais> listaPaises() {
+		
+		return Arrays.asList(new Pais(1,"ES","España"), 
+				new Pais(1,"MX","Mexico"),
+				new Pais(2,"CH","Chile"),
+				new Pais(3,"AR","Argentina"),
+				new Pais(4,"PE","Perú"),
+				new Pais(5,"CO","Colombia"),
+				new Pais(6,"VE","Venezuela"));
+	}
+
 }

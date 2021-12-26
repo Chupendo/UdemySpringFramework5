@@ -68,13 +68,20 @@ public class Usuario {
 //	@Min(1) //Mínimo 1 digito
 //	private int cuenta;
 //	
-	@NotEmpty //Comprobamos que no sea vacio el string. Nota: si fuera un objeto sería con NotNull
-	private String pais;
+	//@NotEmpty //Comprobamos que no sea vacio el string. Nota: si fuera un objeto sería con NotNull
+	//private String pais;
 	
-	public String getPais() {
+	
+	private Pais pais;
+	
+	/* public String getPais() {	return pais; } */
+	public Pais getPais() {
 		return pais;
 	}
-	public void setPais(String pais) {
+	
+	/*public void setPais(String pais) { this.pais = pais; }*/
+	
+	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
 	public String getIdentificador() {
