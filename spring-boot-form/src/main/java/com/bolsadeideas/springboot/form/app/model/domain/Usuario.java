@@ -3,6 +3,7 @@ package com.bolsadeideas.springboot.form.app.model.domain;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
@@ -71,7 +72,7 @@ public class Usuario {
 	//@NotEmpty //Comprobamos que no sea vacio el string. Nota: si fuera un objeto sería con NotNull
 	//private String pais;
 	
-	
+	@Valid
 	private Pais pais;
 	
 	/* public String getPais() {	return pais; } */

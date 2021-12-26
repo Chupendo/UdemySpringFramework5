@@ -18,7 +18,9 @@
 		<li th:text="${#dates.format(usuario.birthday,'dd/MM/yyyy HH:mm:ss')}"></li>
 		<li th:text="${#calendars.format(usuario.birthday,'dd-MM-yyyy HH:mm:ss')}"></li>
 		<!--  <li th:text=${usuario.pais}></li> -->
-		<li th:text=${usuario.pais.id}></li>
+		<li th:text=${usuario.pais.id}></li> <!-- Solo se envía el campo que valida: id -->
+</ul>
+		
 	</ul>
 </body>
 </html>
