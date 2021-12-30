@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.bolsadeideas.springboot.form.app.editors.NombreMayusculaEditor;
 import com.bolsadeideas.springboot.form.app.model.domain.Pais;
 import com.bolsadeideas.springboot.form.app.model.domain.Usuario;
+import com.bolsadeideas.springboot.form.app.services.IPaisService;
 import com.bolsadeideas.springboot.form.app.validation.UsuarioValidador;
 
 @Controller
@@ -39,6 +40,10 @@ public class FormController {
 	@Autowired
 	private UsuarioValidador validador;
 
+	// Inyectamos el serivcio Pais
+	@Autowired
+	private IPaisService paisService;
+	
 	// Descomplamos nuestro validor del método hanlder "procesar" y se se encarge de
 	// gesitonarlo @Valid
 	@InitBinder
@@ -167,7 +172,7 @@ public class FormController {
 	// Datos a mostar de lista desplegable: paises 
 	@ModelAttribute(value = "listaPaises")
 	public List<Pais> listaPaises() {
-		
+		/*
 		return Arrays.asList(new Pais(1,"ES","España"), 
 				new Pais(1,"MX","Mexico"),
 				new Pais(2,"CH","Chile"),
@@ -175,6 +180,9 @@ public class FormController {
 				new Pais(4,"PE","Perú"),
 				new Pais(5,"CO","Colombia"),
 				new Pais(6,"VE","Venezuela"));
+		*/
+		return paisService.listar();
+
 	}
 
 }

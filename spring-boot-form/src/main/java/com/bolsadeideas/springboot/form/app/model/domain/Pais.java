@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 public class Pais {
 	
-	//@NotNull
+	//@NotNull //Se debe comentar si solo se recibe el campo "codigo"
 	private Integer id;
 	
 	@NotEmpty
