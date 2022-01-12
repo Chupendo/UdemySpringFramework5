@@ -88,8 +88,8 @@
 		
 		<!-- Lista de paises -->
 		<label id="listPaises">Pais:</label>
-		<!--<select id="listPaises" th:field="*{pais}"> -->
-		<select id="listPaises" th:field="*{pais.codigo}">
+		<select id="listPaises" th:field="*{pais}">
+		<!--<select id="listPaises" th:field="*{pais.codigo}"> -->
 			<!-- Opcion por defecto -->
 			<option value="">--seleccionar--</option>
 			<!--  Por cada elemento de la lista "paises" lo añade a atributo "pais" y crea una opción, en la cual se va ha mostra el texto de "th:text" y se le va asociar el valor de "th:value"  -->
@@ -98,10 +98,11 @@
 			<!--  Recorrer un mapa<stirng,string> -->
 			<!--  <option th:each="pais: ${paisesMap.entrySet()}" th:text="${pais.value}" th:value="${pais.key}"></option> -->
 			<!--  Recorrer un List<Pais> -->
-			<option th:each="pais: ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.codigo}"></option>
+			<!--<option th:each="pais: ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.codigo}"></option>-->
+			<option th:each="pais: ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.id}"></option>
 		</select>
-		<!--<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}" ></div> -->
-		<div th:if="${#fields.hasErrors('pais.codigo')}" th:errors="*{pais.codigo}" ></div>
+		<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}" ></div>
+		<!--<div th:if="${#fields.hasErrors('pais.codigo')}" th:errors="*{pais.codigo}" ></div>-->
 		<div>
 			<input value="Enviar" type="submit" />
 		</div>

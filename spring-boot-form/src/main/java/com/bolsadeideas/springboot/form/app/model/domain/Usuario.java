@@ -72,7 +72,8 @@ public class Usuario {
 	//@NotEmpty //Comprobamos que no sea vacio el string. Nota: si fuera un objeto sería con NotNull
 	//private String pais;
 	
-	@Valid
+	@NotNull
+	//@Valid //No es necesario al obtener el objeto completo de tipo Pais
 	private Pais pais;
 	
 	/* public String getPais() {	return pais; } */

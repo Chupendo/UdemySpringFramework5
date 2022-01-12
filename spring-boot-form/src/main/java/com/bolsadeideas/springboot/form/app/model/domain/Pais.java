@@ -10,7 +10,7 @@ public class Pais {
 	//@NotNull //Se debe comentar si solo se recibe el campo "codigo"
 	private Integer id;
 	
-	@NotEmpty
+	//@NotEmpty
 	private String codigo;
 	private String nombre;
 	

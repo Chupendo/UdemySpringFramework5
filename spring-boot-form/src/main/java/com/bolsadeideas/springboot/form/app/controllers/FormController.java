@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.bolsadeideas.springboot.form.app.editors.GetPaisPropertyEditor;
 import com.bolsadeideas.springboot.form.app.editors.NombreMayusculaEditor;
 import com.bolsadeideas.springboot.form.app.model.domain.Pais;
 import com.bolsadeideas.springboot.form.app.model.domain.Usuario;
@@ -43,6 +44,10 @@ public class FormController {
 	// Inyectamos el serivcio Pais
 	@Autowired
 	private IPaisService paisService;
+	
+	// Inyectamos el Property Editor "Pais"
+	@Autowired
+	private GetPaisPropertyEditor paisEditor;
 	
 	// Descomplamos nuestro validor del método hanlder "procesar" y se se encarge de
 	// gesitonarlo @Valid
@@ -83,6 +88,9 @@ public class FormController {
 		// aplica a todos los Stirng
 		binder.registerCustomEditor(String.class, "nombre", new NombreMayusculaEditor());// Se aplica al campo "nombre"
 
+		// Registro del PropertyEditor para obtener un objeto Pais dado un id
+		//Clase, atributo del formulario, Serivcio
+		binder.registerCustomEditor(Pais.class,"pais", paisEditor);
 	}
 
 	private static Logger _LOGG = LoggerFactory.getLogger(FormController.class);
