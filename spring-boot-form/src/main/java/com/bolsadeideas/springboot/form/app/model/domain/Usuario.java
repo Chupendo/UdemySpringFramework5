@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.form.app.model.domain;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -76,6 +77,18 @@ public class Usuario {
 	//@Valid //No es necesario al obtener el objeto completo de tipo Pais
 	private Pais pais;
 	
+	@NotNull
+	private List<String> roles;
+	
+	
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
 	/* public String getPais() {	return pais; } */
 	public Pais getPais() {
 		return pais;
@@ -158,7 +171,7 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [identificador=" + identificador + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", username=" + username + ", password=" + password + ", email=" + email + ", cuenta=" + cuenta
-				+ ", birthday=" + birthday + ", pais=" + pais + "]";
+				+ ", birthday=" + birthday + ", pais=" + pais + ", roles=" + roles + "]";
 	}
 	
 	

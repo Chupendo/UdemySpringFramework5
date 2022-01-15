@@ -2,6 +2,7 @@ package com.bolsadeideas.springboot.form.app.controllers;
 
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -57,7 +58,7 @@ public class FormController {
 		// binder.setValidator(validador); //Remplaza el validador por defecto con
 		// anotaciones por el validador UsuarioValidador (solopermite clases
 		// personalidas)
-		binder.addValidators(validador); // Agrega el validador UsuarioValidador (permite usar anotaciones + clases
+		//binder.addValidators(validador); // Agrega el validador UsuarioValidador (permite usar anotaciones + clases
 											// personaliadas)
 
 		// Registramos e inyectamos nuestro editor de fechas (Date) personalizado
@@ -159,6 +160,17 @@ public class FormController {
 	@ModelAttribute(value = "paises")
 	public List<String> paises() {
 		return Arrays.asList("España", "Mexico", "Chile", "Argentian", "Perú", "Colombia", "Venezuela");
+	}
+	
+	// Datos que carga el cliente para seleciconar un role
+	@ModelAttribute(value= "listaRoles") //nombre que se recibe en la vista
+	public List<String> listRoles(){
+		List<String> roles = new ArrayList<>();
+		roles.add("ROLE_ADMIN");
+		roles.add("ROLE_USER");
+		roles.add("ROLE_MODERATOR");
+		
+		return roles;
 	}
 
 	// Datos a mostar de lista desplegable: paises (por defecto si no se indica el
