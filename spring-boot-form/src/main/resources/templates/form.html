@@ -110,9 +110,9 @@
 			<!-- Recorremos la lista de roles -->
 			<div th:each="role:${listaRoles}">
 				<!-- Lo que se envia al backend-->
-				<input type="checkbox" id="listRoles" th:field="*{roles}" th:value="${role}"/>
+				<input type="checkbox" th:field="*{roles}" th:value="${role}"/>
 				<!-- Lo que muestra el front -->
-				<label th:text="${role}"></label>
+				<label th:text="${role}" ></label>
 			</div>
 			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" ></div>
 			

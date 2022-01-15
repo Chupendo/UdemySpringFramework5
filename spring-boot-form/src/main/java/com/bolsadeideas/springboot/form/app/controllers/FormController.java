@@ -58,7 +58,7 @@ public class FormController {
 		// binder.setValidator(validador); //Remplaza el validador por defecto con
 		// anotaciones por el validador UsuarioValidador (solopermite clases
 		// personalidas)
-		//binder.addValidators(validador); // Agrega el validador UsuarioValidador (permite usar anotaciones + clases
+		binder.addValidators(validador); // Agrega el validador UsuarioValidador (permite usar anotaciones + clases
 											// personaliadas)
 
 		// Registramos e inyectamos nuestro editor de fechas (Date) personalizado
