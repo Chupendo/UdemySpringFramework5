@@ -162,7 +162,7 @@ public class FormController {
 		return Arrays.asList("España", "Mexico", "Chile", "Argentian", "Perú", "Colombia", "Venezuela");
 	}
 	
-	// Datos que carga el cliente para seleciconar un role
+	// Datos que carga el cliente para seleciconar un role mediante una lista
 	@ModelAttribute(value= "listaRoles") //nombre que se recibe en la vista
 	public List<String> listRoles(){
 		List<String> roles = new ArrayList<>();
@@ -172,6 +172,18 @@ public class FormController {
 		
 		return roles;
 	}
+	
+	// Datos que carga el cliente para seleciconar un role mediante una mapa
+		@ModelAttribute(value= "mapaRoles") //nombre que se recibe en la vista
+		public Map<String,String> mapRoles(){
+			Map<String, String> roles = new HashMap<>();
+			roles.put("ROLE_ADMIN","Administrador");
+			roles.put("ROLE_USER","Usuario");
+			roles.put("ROLE_MODERATOR","Moderador");
+			
+			return roles;
+		}
+	
 
 	// Datos a mostar de lista desplegable: paises (por defecto si no se indica el
 	// "name", se guarda en el model con el nombre del metodo)
