@@ -80,7 +80,19 @@ public class Usuario {
 	@NotNull
 	private List<Role> roles;
 	
+	//Atributo opcion para checkbox de tipo booleano
+	//Si es true el usuario esta habilitado
+	private Boolean habilitar;
 	
+	
+	public Boolean getHabilitar() {
+		return habilitar;
+	}
+
+	public void setHabilitar(Boolean habilitar) {
+		this.habilitar = habilitar;
+	}
+
 	public List<Role> getRoles() {
 		return roles;
 	}
@@ -171,7 +183,7 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [identificador=" + identificador + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", username=" + username + ", password=" + password + ", email=" + email + ", cuenta=" + cuenta
-				+ ", birthday=" + birthday + ", pais=" + pais + ", roles=" + roles + "]";
+				+ ", birthday=" + birthday + ", pais=" + pais + ", roles=" + roles + ", habilitar=" + habilitar + "]";
 	}
 	
 	

@@ -21,6 +21,7 @@
 		<li th:text=${usuario.pais.codigo}></li>
 		<!-- Solo se envía el campo que valida: codigo -->
 		<li th:text=${usuario.roles}></li>
+		<li th:text="'Habilitado: ' + ${usuario.habilitar}"></li>
 	</ul>
 
 	<div>Roles</div>

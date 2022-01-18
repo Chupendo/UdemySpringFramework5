@@ -158,6 +158,14 @@
 			</div>
 			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" ></div>
 		</div>
+		
+		<!--  Habilitar/Deshabilitar usuario -->
+		<div>
+			<label id="enableUser">Hailibar/Deshabilitar Usuario:</label>
+			<input type="checkbox" id="enableUser" th:field="*{habilitar}">
+			<!--  este campo no se valida, por lo que no es necsairo un hasErrros del mismo -->
+			<!-- <div th:if="${#fields.hasErrors('habilitar')}" th:errors="*{habilitar}"></div> -->
+		</div>
 		<div>
 			<input value="Enviar" type="submit" />
 		</div>

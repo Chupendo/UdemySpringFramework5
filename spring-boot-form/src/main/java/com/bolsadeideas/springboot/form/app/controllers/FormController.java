@@ -132,6 +132,7 @@ public class FormController {
 		usuario.setPassword("123"); // El valor de la clave no aparecerá porque el cliente no lo añade
 		usuario.setCuenta(5);
 		usuario.setEmail("aruizpen@form.es");
+		usuario.setHabilitar(true);
 		_LOGG.info("[obtenerFormulario] user created: " + usuario.toString());
 
 		model.addAttribute("user", usuario);
