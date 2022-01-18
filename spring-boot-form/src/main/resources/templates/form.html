@@ -127,14 +127,34 @@
 		</div>
 
 		<!--  Mapa de roles -->
+<!--
 		<div>
 			<label id="labelRoles" >Roles:</label>
+-->
 			<!-- Recorremos la lista de roles -->
+<!--
 			<div th:each="role:${mapaRoles}">
+-->
 				<!-- Lo que se envia al backend-->
+<!--
 				<input type="checkbox" th:field="*{roles}" th:value="${role.key}"/>
+-->
 				<!-- Lo que muestra el front, asocia el label con el input -->
+<!--
 				<label th:text="${role.value}" th:for="${#ids.prev('roles')}"></label>
+			</div>
+			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" ></div>
+		</div>
+-->
+		<!--  Lista de Objetos de roles -->
+		<div>
+			<label id="objectsRoles" >Roles:</label>
+			<!-- Recorremos la lista de roles -->
+			<div th:each="role:${objectsRoles}">
+				<!-- Lo que se envia al backend-->
+				<input type="checkbox" th:field="*{roles}" th:value="${role.id}"/>
+				<!-- Lo que muestra el front, asocia el label con el input -->
+				<label th:text="${role.nombre}" th:for="${#ids.prev('roles')}"></label>
 			</div>
 			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" ></div>
 		</div>

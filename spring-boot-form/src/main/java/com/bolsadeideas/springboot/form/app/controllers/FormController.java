@@ -29,9 +29,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bolsadeideas.springboot.form.app.editors.GetPaisPropertyEditor;
 import com.bolsadeideas.springboot.form.app.editors.NombreMayusculaEditor;
+import com.bolsadeideas.springboot.form.app.editors.RolesPropertyEditor;
 import com.bolsadeideas.springboot.form.app.model.domain.Pais;
+import com.bolsadeideas.springboot.form.app.model.domain.Role;
 import com.bolsadeideas.springboot.form.app.model.domain.Usuario;
 import com.bolsadeideas.springboot.form.app.services.IPaisService;
+import com.bolsadeideas.springboot.form.app.services.IRoleService;
 import com.bolsadeideas.springboot.form.app.validation.UsuarioValidador;
 
 @Controller
@@ -46,9 +49,17 @@ public class FormController {
 	@Autowired
 	private IPaisService paisService;
 	
+	// Inyectmoas a nivel de interfaz el servicio Role
+	@Autowired
+	private IRoleService roleService;
+	
 	// Inyectamos el Property Editor "Pais"
 	@Autowired
 	private GetPaisPropertyEditor paisEditor;
+	
+	// Inyectamos el Property Editor "Role"
+	@Autowired
+	private RolesPropertyEditor roleEditor;
 	
 	// Descomplamos nuestro validor del método hanlder "procesar" y se se encarge de
 	// gesitonarlo @Valid
@@ -90,8 +101,12 @@ public class FormController {
 		binder.registerCustomEditor(String.class, "nombre", new NombreMayusculaEditor());// Se aplica al campo "nombre"
 
 		// Registro del PropertyEditor para obtener un objeto Pais dado un id
-		//Clase, atributo del formulario, Serivcio
+		//Clase, atributo del formulario (th:field="*{pais}"), Serivcio (inyetado con autowired)
 		binder.registerCustomEditor(Pais.class,"pais", paisEditor);
+	
+		// Registro del PropertyEditor del servicio Role
+		//Clase, atributo del formulario 
+		binder.registerCustomEditor(Role.class, "roles", roleEditor);
 	}
 
 	private static Logger _LOGG = LoggerFactory.getLogger(FormController.class);
@@ -174,17 +189,22 @@ public class FormController {
 	}
 	
 	// Datos que carga el cliente para seleciconar un role mediante una mapa
-		@ModelAttribute(value= "mapaRoles") //nombre que se recibe en la vista
-		public Map<String,String> mapRoles(){
-			Map<String, String> roles = new HashMap<>();
-			roles.put("ROLE_ADMIN","Administrador");
-			roles.put("ROLE_USER","Usuario");
-			roles.put("ROLE_MODERATOR","Moderador");
-			
-			return roles;
-		}
-	
+	@ModelAttribute(value = "mapaRoles") // nombre que se recibe en la vista
+	public Map<String, String> mapRoles() {
+		Map<String, String> roles = new HashMap<>();
+		roles.put("ROLE_ADMIN", "Administrador");
+		roles.put("ROLE_USER", "Usuario");
+		roles.put("ROLE_MODERATOR", "Moderador");
 
+		return roles;
+	}
+	
+	// Datos que carga en el cliente para seleciconar un role mediante un objeto
+	@ModelAttribute(value = "objectsRoles") // nombre que se recibe en la vista
+	public List<Role> objetosRoles() {
+		
+		return this.roleService.listar();
+	}
 	// Datos a mostar de lista desplegable: paises (por defecto si no se indica el
 	// "name", se guarda en el model con el nombre del metodo)
 	@ModelAttribute(value = "paisesMap")
