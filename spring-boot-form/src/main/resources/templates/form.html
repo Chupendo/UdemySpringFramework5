@@ -68,28 +68,29 @@
 		<label id="date-birthday">Fecha de nacimiento:</label>
 		<div>
 			<!--  captura como un string -->
-<!-- 
+			<!-- 
 			<input id="birthday" type="text" th:field="*{birthday}" placeholder="yyy/MM/dd HH:mm:ss" />
 -->
-<!-- 
+			<!-- 
 			<!--  captura como fecha: -->
 			<!--  OPCION A: captura como un date: solo añade fecha, no añade horas, minutos y segundos -->
-<!-- 
+			<!-- 
 			<input id="birthday" type="date" th:field="*{birthday}"/>
 -->
-			<input id="date-birthday" type="datetime-local" th:field="*{birthday}" step="1"/>
+			<input id="date-birthday" type="datetime-local"
+				th:field="*{birthday}" step="1" />
 			<!--  OPCION B: captura como un date: solo añade fecha, con horas, minutos y segundos -->
-<!--  			
+			<!--  			
 			<input id="birthday" type="datetime-local" th:field="*{birthday}" step="1"/>
--->			
+-->
 			<!-- mostrar mensjae mensaje de error si falla al validar la fecha -->
-			<div th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" ></div>
+			<div th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></div>
 		</div>
-		
+
 		<!-- Lista de paises -->
-		<label id="listPaises">Pais:</label>
-		<select id="listPaises" th:field="*{pais}">
-		<!--<select id="listPaises" th:field="*{pais.codigo}"> -->
+		<label id="listPaises">Pais:</label> <select id="listPaises"
+			th:field="*{pais}">
+			<!--<select id="listPaises" th:field="*{pais.codigo}"> -->
 			<!-- Opcion por defecto -->
 			<option value="">--seleccionar--</option>
 			<!--  Por cada elemento de la lista "paises" lo añade a atributo "pais" y crea una opción, en la cual se va ha mostra el texto de "th:text" y se le va asociar el valor de "th:value"  -->
@@ -99,27 +100,28 @@
 			<!--  <option th:each="pais: ${paisesMap.entrySet()}" th:text="${pais.value}" th:value="${pais.key}"></option> -->
 			<!--  Recorrer un List<Pais> -->
 			<!--<option th:each="pais: ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.codigo}"></option>-->
-			<option th:each="pais: ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.id}"></option>
+			<option th:each="pais: ${listaPaises}" th:text="${pais.nombre}"
+				th:value="${pais.id}"></option>
 		</select>
-		<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}" ></div>
+		<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
 		<!--<div th:if="${#fields.hasErrors('pais.codigo')}" th:errors="*{pais.codigo}" ></div>-->
-		
+
 		<!-- Roles -->
 		<!--  Lista de roles -->
-<!-- 
+		<!-- 
 		<div>
 			<label id="labelRoles" >Roles:</label>
  -->
-			<!-- Recorremos la lista de roles -->
-<!-- 
+		<!-- Recorremos la lista de roles -->
+		<!-- 
 			<div th:each="role:${listaRoles}">
 -->
-				<!-- Lo que se envia al backend-->
-<!-- 
+		<!-- Lo que se envia al backend-->
+		<!-- 
 				<input type="checkbox" th:field="*{roles}" th:value="${role}"/>
 -->
-				<!-- Lo que muestra el front, asocia el label con el input -->
-<!-- 
+		<!-- Lo que muestra el front, asocia el label con el input -->
+		<!-- 
 				<label th:text="${role}" th:for="${#ids.prev('roles')}"></label>
 <!-- 
 			</div>
@@ -127,20 +129,20 @@
 		</div>
 
 		<!--  Mapa de roles -->
-<!--
+		<!--
 		<div>
 			<label id="labelRoles" >Roles:</label>
 -->
-			<!-- Recorremos la lista de roles -->
-<!--
+		<!-- Recorremos la lista de roles -->
+		<!--
 			<div th:each="role:${mapaRoles}">
 -->
-				<!-- Lo que se envia al backend-->
-<!--
+		<!-- Lo que se envia al backend-->
+		<!--
 				<input type="checkbox" th:field="*{roles}" th:value="${role.key}"/>
 -->
-				<!-- Lo que muestra el front, asocia el label con el input -->
-<!--
+		<!-- Lo que muestra el front, asocia el label con el input -->
+		<!--
 				<label th:text="${role.value}" th:for="${#ids.prev('roles')}"></label>
 			</div>
 			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" ></div>
@@ -148,21 +150,33 @@
 -->
 		<!--  Lista de Objetos de roles -->
 		<div>
-			<label id="objectsRoles" >Roles:</label>
+			<label id="objectsRoles">Roles:</label>
 			<!-- Recorremos la lista de roles -->
 			<div th:each="role:${objectsRoles}">
 				<!-- Lo que se envia al backend-->
-				<input type="checkbox" th:field="*{roles}" th:value="${role.id}"/>
+				<input type="checkbox" th:field="*{roles}" th:value="${role.id}" />
 				<!-- Lo que muestra el front, asocia el label con el input -->
 				<label th:text="${role.nombre}" th:for="${#ids.prev('roles')}"></label>
 			</div>
-			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" ></div>
+			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
 		</div>
-		
+		<!--  Genero usuario -->
+		<div>
+			<label id="generoUser">Genero:</label> 
+			<div>
+				<input type="radio" id="generoUserInput_1" th:field="*{genero}" value="Hombre">
+				<label for="generoUserInput_1">Hombre</label>
+			</div>
+			<div>
+				<input type="radio" id="generoUserInput_2" th:field="*{genero}" value="Mujer">
+				<label for="generoUserInput_2">Mujer</label>
+			</div>
+			 <div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+		</div>
 		<!--  Habilitar/Deshabilitar usuario -->
 		<div>
-			<label id="enableUser">Hailibar/Deshabilitar Usuario:</label>
-			<input type="checkbox" id="enableUser" th:field="*{habilitar}">
+			<label id="enableUser">Hailibar/Deshabilitar Usuario:</label> <input
+				type="checkbox" id="enableUser" th:field="*{habilitar}">
 			<!--  este campo no se valida, por lo que no es necsairo un hasErrros del mismo -->
 			<!-- <div th:if="${#fields.hasErrors('habilitar')}" th:errors="*{habilitar}"></div> -->
 		</div>

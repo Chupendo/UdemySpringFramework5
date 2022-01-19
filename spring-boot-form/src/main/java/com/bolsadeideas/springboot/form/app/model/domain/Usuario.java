@@ -84,7 +84,18 @@ public class Usuario {
 	//Si es true el usuario esta habilitado
 	private Boolean habilitar;
 	
+	@NotEmpty
+	private String genero;
 	
+		
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
 	public Boolean getHabilitar() {
 		return habilitar;
 	}
@@ -183,7 +194,8 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [identificador=" + identificador + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", username=" + username + ", password=" + password + ", email=" + email + ", cuenta=" + cuenta
-				+ ", birthday=" + birthday + ", pais=" + pais + ", roles=" + roles + ", habilitar=" + habilitar + "]";
+				+ ", birthday=" + birthday + ", pais=" + pais + ", roles=" + roles + ", habilitar=" + habilitar
+				+ ", genero=" + genero + "]";
 	}
 	
 	
