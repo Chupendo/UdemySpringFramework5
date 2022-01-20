@@ -253,6 +253,5 @@ public class FormController {
 		genero.put("Hombre", "Masculino");
 		genero.put("Mujer", "Femenino");
 		return genero;
-
 	}
 }
