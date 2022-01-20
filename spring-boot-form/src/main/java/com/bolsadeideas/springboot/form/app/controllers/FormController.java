@@ -48,19 +48,19 @@ public class FormController {
 	// Inyectamos el serivcio Pais
 	@Autowired
 	private IPaisService paisService;
-	
+
 	// Inyectmoas a nivel de interfaz el servicio Role
 	@Autowired
 	private IRoleService roleService;
-	
+
 	// Inyectamos el Property Editor "Pais"
 	@Autowired
 	private GetPaisPropertyEditor paisEditor;
-	
+
 	// Inyectamos el Property Editor "Role"
 	@Autowired
 	private RolesPropertyEditor roleEditor;
-	
+
 	// Descomplamos nuestro validor del método hanlder "procesar" y se se encarge de
 	// gesitonarlo @Valid
 	@InitBinder
@@ -101,11 +101,12 @@ public class FormController {
 		binder.registerCustomEditor(String.class, "nombre", new NombreMayusculaEditor());// Se aplica al campo "nombre"
 
 		// Registro del PropertyEditor para obtener un objeto Pais dado un id
-		//Clase, atributo del formulario (th:field="*{pais}"), Serivcio (inyetado con autowired)
-		binder.registerCustomEditor(Pais.class,"pais", paisEditor);
-	
+		// Clase, atributo del formulario (th:field="*{pais}"), Serivcio (inyetado con
+		// autowired)
+		binder.registerCustomEditor(Pais.class, "pais", paisEditor);
+
 		// Registro del PropertyEditor del servicio Role
-		//Clase, atributo del formulario 
+		// Clase, atributo del formulario
 		binder.registerCustomEditor(Role.class, "roles", roleEditor);
 	}
 
@@ -133,6 +134,7 @@ public class FormController {
 		usuario.setCuenta(5);
 		usuario.setEmail("aruizpen@form.es");
 		usuario.setHabilitar(true);
+		usuario.setGenero("Hombre");
 		_LOGG.info("[obtenerFormulario] user created: " + usuario.toString());
 
 		model.addAttribute("user", usuario);
@@ -177,18 +179,18 @@ public class FormController {
 	public List<String> paises() {
 		return Arrays.asList("España", "Mexico", "Chile", "Argentian", "Perú", "Colombia", "Venezuela");
 	}
-	
+
 	// Datos que carga el cliente para seleciconar un role mediante una lista
-	@ModelAttribute(value= "listaRoles") //nombre que se recibe en la vista
-	public List<String> listRoles(){
+	@ModelAttribute(value = "listaRoles") // nombre que se recibe en la vista
+	public List<String> listRoles() {
 		List<String> roles = new ArrayList<>();
 		roles.add("ROLE_ADMIN");
 		roles.add("ROLE_USER");
 		roles.add("ROLE_MODERATOR");
-		
+
 		return roles;
 	}
-	
+
 	// Datos que carga el cliente para seleciconar un role mediante una mapa
 	@ModelAttribute(value = "mapaRoles") // nombre que se recibe en la vista
 	public Map<String, String> mapRoles() {
@@ -199,13 +201,14 @@ public class FormController {
 
 		return roles;
 	}
-	
+
 	// Datos que carga en el cliente para seleciconar un role mediante un objeto
 	@ModelAttribute(value = "objectsRoles") // nombre que se recibe en la vista
 	public List<Role> objetosRoles() {
-		
+
 		return this.roleService.listar();
 	}
+
 	// Datos a mostar de lista desplegable: paises (por defecto si no se indica el
 	// "name", se guarda en el model con el nombre del metodo)
 	@ModelAttribute(value = "paisesMap")
@@ -222,20 +225,34 @@ public class FormController {
 		return paises;
 	}
 
-	// Datos a mostar de lista desplegable: paises 
+	// Datos a mostar de lista desplegable: paises
 	@ModelAttribute(value = "listaPaises")
 	public List<Pais> listaPaises() {
 		/*
-		return Arrays.asList(new Pais(1,"ES","España"), 
-				new Pais(1,"MX","Mexico"),
-				new Pais(2,"CH","Chile"),
-				new Pais(3,"AR","Argentina"),
-				new Pais(4,"PE","Perú"),
-				new Pais(5,"CO","Colombia"),
-				new Pais(6,"VE","Venezuela"));
-		*/
+		 * return Arrays.asList(new Pais(1,"ES","España"), new Pais(1,"MX","Mexico"),
+		 * new Pais(2,"CH","Chile"), new Pais(3,"AR","Argentina"), new
+		 * Pais(4,"PE","Perú"), new Pais(5,"CO","Colombia"), new
+		 * Pais(6,"VE","Venezuela"));
+		 */
 		return paisService.listar();
 
 	}
 
+	// Opciones de genero
+	@ModelAttribute(value = "generoOptionsList")
+	public List<String> listaGenero() {
+
+		return Arrays.asList("Hombre", "Mujer");
+	}
+
+	// Opciones de genero
+	@ModelAttribute(value = "generoOptionsMap")
+	public Map<String, String> mapaGenero() {
+
+		Map<String, String> genero = new HashMap<String, String>();
+		genero.put("Hombre", "Masculino");
+		genero.put("Mujer", "Femenino");
+		return genero;
+
+	}
 }

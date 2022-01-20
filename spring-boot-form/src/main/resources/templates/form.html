@@ -161,6 +161,8 @@
 			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
 		</div>
 		<!--  Genero usuario -->
+		<!--  Radio button insertado manualmnete la opciones -->
+		<!--
 		<div>
 			<label id="generoUser">Genero:</label> 
 			<div>
@@ -173,6 +175,31 @@
 			</div>
 			 <div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
 		</div>
+		-->
+		<!--  Radio button insertado dinamicamente la opciones -->
+		<div>
+			<label id="generoUser">Genero:</label>
+
+			<!--  Lista de Genero String -->
+			<div th:each="generoOption : ${generoOptionsList}">
+				<!-- <input type="radio" name="generoList" th:field="*{genero}"
+					th:value="${generoOption}" th:checked="${generoOption == 'Hombre'}"> -->
+				<input type="radio" name="generoList" th:field="*{genero}"
+					th:value="${generoOption}" th:checked="*{genero} eq ${generoOption}">
+				<label for="${#ids.prev('genero')}" th:text="${generoOption}"></label>
+			</div>
+			<div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+
+			<!--  Mapa de Genero String -->
+			<!--
+			<div th:each="generoOption : ${generoOptionsMap}">
+				<input type="radio" name="generoMap" th:field="*{genero}"
+					th:value="${generoOption.key}"
+					th:checked="*{genero} eq ${generoOption.key}"> <label
+					for="${#ids.prev('genero')}" th:text="${generoOption.value}"></label>
+			</div>
+			-->
+		</div>
 		<!--  Habilitar/Deshabilitar usuario -->
 		<div>
 			<label id="enableUser">Hailibar/Deshabilitar Usuario:</label> <input
@@ -184,5 +211,9 @@
 			<input value="Enviar" type="submit" />
 		</div>
 	</form>
+
+	<script type="text/javascript">
+		
+	</script>
 </body>
 </html>
