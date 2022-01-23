@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.bolsadeideas.springboot.form.app.editors.GetPaisPropertyEditor;
 import com.bolsadeideas.springboot.form.app.editors.NombreMayusculaEditor;
@@ -152,7 +153,7 @@ public class FormController {
 
 	// Procesa la peticion de tipo post que va a form, para obtener los datos.
 	@PostMapping("/form")
-	public String leerFormulario(@Valid @ModelAttribute("user") Usuario usuario, BindingResult result, Model model) {
+	public String leerFormulario(@Valid @ModelAttribute("user") Usuario usuario, BindingResult result, Model model, SessionStatus status) {
 
 		_LOGG.info("[leerFormulario] user recived: " + usuario.toString());
 
@@ -173,7 +174,7 @@ public class FormController {
 		// Si no hay errores, se procesan los datos
 		model.addAttribute("titulo", "Resultado form");
 		model.addAttribute("usuario", usuario);
-
+		status.isComplete(); 
 		return "resultado";
 	}
 
