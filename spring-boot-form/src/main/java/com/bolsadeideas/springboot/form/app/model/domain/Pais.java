@@ -67,6 +67,7 @@ public class Pais {
 	@Override
 	public String toString() {
 		return "Pais [id=" + id + ", codigo=" + codigo + ", nombre=" + nombre + "]";
+		//return this.id.toString();
 	}
 	
 }

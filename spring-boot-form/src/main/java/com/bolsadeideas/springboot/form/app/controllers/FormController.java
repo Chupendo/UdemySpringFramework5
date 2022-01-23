@@ -134,6 +134,7 @@ public class FormController {
 		usuario.setCuenta(5);
 		usuario.setEmail("aruizpen@form.es");
 		usuario.setHabilitar(true);
+		usuario.setPais(new Pais(2,"CH","Chile"));
 		usuario.setGenero("Hombre");
 		usuario.setValorSecreto("Algun valor secreto ****");
 		_LOGG.info("[obtenerFormulario] user created: " + usuario.toString());
