@@ -44,6 +44,7 @@ public class Role {
 		return Objects.hash(id, nombre, role);
 	}
 
+	//Método equal de Roel
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

@@ -88,9 +88,9 @@
 		</div>
 
 		<!-- Lista de paises -->
-		<label id="listPaises">Pais:</label> 
-		<select id="listPaises"	th:field="*{pais}">
-		<!--<select id="listPaises" th:field="*{pais.codigo}"> -->
+		<label id="listPaises">Pais:</label> <select id="listPaises"
+			th:field="*{pais}">
+			<!--<select id="listPaises" th:field="*{pais.codigo}"> -->
 			<!-- Opcion por defecto -->
 			<option value="">--seleccionar--</option>
 			<!--  Por cada elemento de la lista "paises" lo añade a atributo "pais" y crea una opción, en la cual se va ha mostra el texto de "th:text" y se le va asociar el valor de "th:value"  -->
@@ -161,13 +161,17 @@
 			<label id="objectsRoles">Roles:</label>
 			<!-- Recorremos la lista de roles -->
 			<div th:each="role:${objectsRoles}">
-				<!-- Lo que se envia al backend-->
-				<input type="checkbox" th:field="*{roles}" th:value="${role.id}" />
+				<!-- Lo que se envia al backend (selección por defecto, comprueba si ${role} esta en la lista th:field="*{roles}" ) -->
+				<!-- <input type="checkbox" th:field="*{roles}" th:value="${role.id}" /> -->
+				<!-- Lo que se envia al backend (selección definia, comprueba si ${role} esta en la lista ${user.roles} ) -->
+				<input type="checkbox" th:field="*{roles}" th:value="${role.id}"
+					checked="${#lists.contains(user.roles,roles)}" />
 				<!-- Lo que muestra el front, asocia el label con el input -->
 				<label th:text="${role.nombre}" th:for="${#ids.prev('roles')}"></label>
 			</div>
 			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
 		</div>
+
 		<!--  Genero usuario -->
 		<!--  Radio button insertado manualmnete la opciones -->
 		<!--
@@ -187,13 +191,34 @@
 		<!--  Radio button insertado dinamicamente la opciones -->
 		<div>
 			<label id="generoUser">Genero:</label>
+			<!--  Lista de Genero String -->
+			<!-- 
+			<div th:each="generoOption : ${generoOptionsList}">
+				<input type="radio" name="generoList" th:field="*{genero}"
+					th:value="${generoOption}"> <label
+					for="${#ids.prev('genero')}" th:text="${generoOption}"></label>
+			</div>
+			<div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+			 -->
+			 
+			<!--  Lista de Genero String -->
+			<div th:each="generoOption : ${generoOptionsList}">
+				<!-- <input type="radio" name="generoList" th:field="*{genero}"
+					th:value="${generoOption}" th:checked="${generoOption == 'Hombre'}"> -->
+				<input type="radio" name="generoList" th:field="*{genero}"
+					th:value="${generoOption}"
+					th:checked="*{genero} eq ${generoOption}"> <label
+					for="${#ids.prev('genero')}" th:text="${generoOption}"></label>
+			</div>
+			<div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
 
 			<!--  Lista de Genero String -->
 			<div th:each="generoOption : ${generoOptionsList}">
 				<!-- <input type="radio" name="generoList" th:field="*{genero}"
 					th:value="${generoOption}" th:checked="${generoOption == 'Hombre'}"> -->
 				<input type="radio" name="generoList" th:field="*{genero}"
-					th:value="${generoOption}" th:checked="*{genero} eq ${generoOption}">
+					th:value="${generoOption}"
+					th:checked="${#lists.contains(generoOptionsList,user.genero)}">
 				<label for="${#ids.prev('genero')}" th:text="${generoOption}"></label>
 			</div>
 			<div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
@@ -215,7 +240,13 @@
 			<!--  este campo no se valida, por lo que no es necsairo un hasErrros del mismo -->
 			<!-- <div th:if="${#fields.hasErrors('habilitar')}" th:errors="*{habilitar}"></div> -->
 		</div>
-		
+
+		<!--  Habilitar/Deshabilitar 2 usuario -->
+		<!-- <div>
+			<label id="enableUser2">Hailibar/Deshabilitar Usuario:</label> <input
+				type="checkbox" id="enableUser2" th:value="*{habilitar2}" th:field="*{habilitar2}">
+		</div>
+		-->
 		<!-- Input no visible para el usuario en el formulario -->
 		<div>
 			<input type="hidden" th:field="*{valorSecreto}">

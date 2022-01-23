@@ -83,7 +83,15 @@ public class Usuario {
 	//Atributo opcion para checkbox de tipo booleano
 	//Si es true el usuario esta habilitado
 	private Boolean habilitar;
-	
+//	private String habilitar2;
+//	
+//	public String getHabilitar2() {
+//		return habilitar2;
+//	}
+//
+//	public void setHabilitar2(String habilitar2) {
+//		this.habilitar2 = habilitar2;
+//	}
 	@NotEmpty
 	private String genero;
 	
