@@ -207,6 +207,11 @@
 			<!--  este campo no se valida, por lo que no es necsairo un hasErrros del mismo -->
 			<!-- <div th:if="${#fields.hasErrors('habilitar')}" th:errors="*{habilitar}"></div> -->
 		</div>
+		
+		<!-- Input no visible para el usuario en el formulario -->
+		<div>
+			<input type="hidden" th:field="*{valorSecreto}">
+		</div>
 		<div>
 			<input value="Enviar" type="submit" />
 		</div>

@@ -135,6 +135,7 @@ public class FormController {
 		usuario.setEmail("aruizpen@form.es");
 		usuario.setHabilitar(true);
 		usuario.setGenero("Hombre");
+		usuario.setValorSecreto("Algun valor secreto ****");
 		_LOGG.info("[obtenerFormulario] user created: " + usuario.toString());
 
 		model.addAttribute("user", usuario);
