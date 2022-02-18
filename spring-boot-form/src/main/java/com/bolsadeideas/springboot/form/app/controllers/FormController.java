@@ -151,30 +151,60 @@ public class FormController {
 		return "form";
 	}
 
-	// Procesa la peticion de tipo post que va a form, para obtener los datos.
+	// Procesa la peticion de tipo post que va a form, para obtener los datos. <<CAMBIAR 
+	/*
+	 * Metodo post que se encarga de procesar el registro de un usuario de un formulario
+	 * redirigue a otra vista
+	 * @param Usario: datos introduidos por el usuario en el formulairo y que son validados, se añaden a la sesion automáticamente
+	 * @param BindingResult:	contiente los datos y resultuados de los datos validados
+	 * @param model: objeto de modelador de datos
+	 */
 	@PostMapping("/form")
-	public String leerFormulario(@Valid @ModelAttribute("user") Usuario usuario, BindingResult result, Model model, SessionStatus status) {
+	public String leerFormulario(@Valid @ModelAttribute("user") Usuario usuario, BindingResult result, Model model ) {
 
 		_LOGG.info("[leerFormulario] user recived: " + usuario.toString());
 
-		// Validamoss el objeto mediante nuestra clase validadora y registrmoas los
-		// errores
-		// validador.validate(usuario, result); //Lo automatizamos con @InitBinder
-
+	
 		// Trabajo automática e implicita de los errores con Thymelaf y Spring, en la
 		// vista
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario usuarios");
-			// Datos de la lista desplebale "paises"- Nota: Se crea un metodo anotado con
-			// ModelAtribute
-			// model.addAttribute("paises",
-			// Arrays.asList("España","Mexico","Chile","Argentian","Perú","Colombia","Venezuela"));
 			return "form";
 		}
+		
+		
+		//Redirigimos hacia una nueva ruta (genera una nueva request)
+		return "redirect:/ver";
+	}
+	
+	//Proceso el usuario guarado en la sesion
+	/*
+	 * Metodo get que se encarga de procesar el registro de un usuario de un formulario
+	 * @param Usuario: inyecta los datos del usuario introduciones en la sesión cuyo atributo sea "user" y lo ponemos como no requerido evitar la excecipon de null "user" en caso de recargar la página
+	 * @param BindingResult:	contiente los datos y resultuados de los datos validados
+	 * @param SessionStatus contiente los datos de la sesion
+	 */
+	@GetMapping("/ver")
+	public String ver(@SessionAttribute(name="user", required = false) Usuario usuario, Model model,SessionStatus status) {
+		//Comprobamos si hay sesión de datos de usuario
+		if(usuario==null) {
+			//No hay datos
+			return "redirect:/form";
+		}
+		
 		// Si no hay errores, se procesan los datos
 		model.addAttribute("titulo", "Resultado form");
-		model.addAttribute("usuario", usuario);
-		status.isComplete(); 
+		
+		//No es necesario introducirlo manualmente en la vista, ya que esta como SesionAtribute
+		//model.addAttribute("user", usuario);
+		
+		//Dado que el nombre del atributo en la seisón y en formulario no son iguales, se ha de introducir
+		model.addAttribute("usuario", usuario); 
+		
+		//Finalizamos la sesion del usuario (se elimina los datos de la sesion)
+		status.setComplete(); 
+		
+		//Devolvemos la vista
 		return "resultado";
 	}
 
