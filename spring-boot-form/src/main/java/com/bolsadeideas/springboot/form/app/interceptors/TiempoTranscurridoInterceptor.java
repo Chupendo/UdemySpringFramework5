@@ -52,10 +52,10 @@ public class TiempoTranscurridoInterceptor implements HandlerInterceptor {
 		long tiempoTranscurridoMS = tiempoFinMS - timpoInicioMS;
 		
 		//Lo pasamos a la vista
-		//if(modelAndView!=null) {
+		if(modelAndView!=null) {
 			modelAndView.addObject("tiempoTranscurrido", tiempoTranscurridoMS);
 			
-		//}
+		}
 		
 		logger.info("Tiempo Transcurrido: "+tiempoTranscurridoMS+" milisegudnos");
 		logger.info("TiempoTranscurridoInterceptor : proHandle() saliend ... ");
