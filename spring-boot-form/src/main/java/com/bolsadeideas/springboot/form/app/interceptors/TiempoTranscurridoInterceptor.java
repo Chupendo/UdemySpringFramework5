@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-@Component
+@Component("TiempoTranscurridoInterceptor")
 public class TiempoTranscurridoInterceptor implements HandlerInterceptor {
 
 	//Variable para mostrar informaicon en consola por medio del Log
