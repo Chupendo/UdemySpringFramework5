@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,6 +21,10 @@ public class TiempoTranscurridoInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+		if(handler instanceof HandlerMethod) {
+			HandlerMethod metodo = (HandlerMethod) handler;
+			logger.info("Es un método del controlador: " + metodo.getMethod().getName() );
+		}
 		logger.info("TiempoTranscurridoInterceptor : preHandle() entrando ... ");
 		logger.info("Interceptando: "+handler);
 		
@@ -52,7 +57,7 @@ public class TiempoTranscurridoInterceptor implements HandlerInterceptor {
 		long tiempoTranscurridoMS = tiempoFinMS - timpoInicioMS;
 		
 		//Lo pasamos a la vista
-		if(modelAndView!=null) {
+		if(handler instanceof HandlerMethod && modelAndView!=null) {
 			modelAndView.addObject("tiempoTranscurrido", tiempoTranscurridoMS);
 			
 		}
