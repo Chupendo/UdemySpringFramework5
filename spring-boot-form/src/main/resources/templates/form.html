@@ -11,6 +11,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="container alert alert-success">
+		<span th:text="'Tiempo transcurrido: '+${tiempoTranscurrido}+' ms'"></span>
+	</div>
 	<h3 th:text="${titulo}">Título principal de la página</h3>
 	<form th:action="@{/form}" method="post" th:object="${user}">
 		<label for="identificador">Identificador</label>

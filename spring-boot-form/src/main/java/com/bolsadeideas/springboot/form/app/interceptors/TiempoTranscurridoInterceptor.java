@@ -30,7 +30,7 @@ public class TiempoTranscurridoInterceptor implements HandlerInterceptor {
 
 		//Generamos una demora aleatorio
 		Random random = new Random();
-		Integer demora = random.nextInt(00); //de 0 hasta 499 (500 milisegunds)
+		Integer demora = random.nextInt(500); //de 0 hasta 499 (500 milisegunds)
 		Thread.sleep(demora); //Demora aleatoria
 		
 		return true;

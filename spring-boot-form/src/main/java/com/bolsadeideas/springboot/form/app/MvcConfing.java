@@ -19,6 +19,7 @@ public class MvcConfing implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		//Implementación en todos las rutas o patrones de la aplicación
 		registry.addInterceptor(tiempoTranscurridoInterceptor);
+		
 	}
 	
 }
