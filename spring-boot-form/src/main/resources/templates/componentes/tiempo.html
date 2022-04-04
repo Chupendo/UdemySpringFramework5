@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<!-- Plantilla A de tiempoTrasncurrio, muestra el tiempo en ms   -->
+	<section th:fragment="interceptor-a">
+	<div class="container alert alert-success">
+		<span th:text="'Tiempo transcurrido: '+${tiempoTranscurrido}+' ms'"></span>
+	</div>
+	</section>
+	
+	<!-- Plantilla B de tiempoTrasncurrio, muestra el tiempo en s   -->
+	<section th:fragment="interceptor-b">
+	<div class="container alert alert-success">
+		<span th:text="'Tiempo transcurrido: '+${tiempoTranscurrido}/1000+' s'"></span>
+	</div>
+	</section>
+</body>
+</html>

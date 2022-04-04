@@ -18,9 +18,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container alert alert-success">
-		<span th:text="'Tiempo transcurrido: '+${tiempoTranscurrido}/1000+' s'"></span>
-	</div>
+	<section th:replace="componentes/tiempo :: interceptor-b"></section>
 	<h3 th:text="${titulo}"></h3>
 	<ul>
 		<li th:text=${usuario.nombre}></li>
