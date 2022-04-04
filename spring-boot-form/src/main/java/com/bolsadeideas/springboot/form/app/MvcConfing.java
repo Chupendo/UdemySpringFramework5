@@ -18,7 +18,8 @@ public class MvcConfing implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		//Implementación en todos las rutas o patrones de la aplicación
-		registry.addInterceptor(tiempoTranscurridoInterceptor);
+		//se aplica el interceptor a cualqueir ruta que venga despues de "form" incluido "form"
+		registry.addInterceptor(tiempoTranscurridoInterceptor).addPathPatterns("/form/**");
 		
 	}
 	
