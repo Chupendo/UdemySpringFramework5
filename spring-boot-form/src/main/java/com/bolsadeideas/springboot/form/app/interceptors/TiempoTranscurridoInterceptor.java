@@ -51,7 +51,10 @@ public class TiempoTranscurridoInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		
-		
+		if(request.getMethod().equalsIgnoreCase("post")) {
+			//Si es post, omitimos y nos salimos del interceptor
+			return;
+		}
 		//Calculamos el tiempo de fin
 		long tiempoFinMS = System.currentTimeMillis();
 		long timpoInicioMS = (Long) request.getAttribute("timpoInicio"); //Obtenemos el tiempo de inicio
