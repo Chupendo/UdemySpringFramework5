@@ -44,11 +44,13 @@ public class TiempoTranscurridoInterceptor implements HandlerInterceptor {
 		Thread.sleep(demora); //Demora aleatoria
 		
 		/* Ejemplo de redireccion a otra ruta si no hay sesion*/
+		/*
 		System.out.println(request.getSession().getAttribute("user"));
 		if(request.getSession().getAttribute("user")==null) {
 			response.sendRedirect(request.getContextPath().concat("/loggin"));//En spring la ruta siempre parte de la ruta base (ruta de contexto) 	de nuestra app
 			return false;
 		}
+		*/
 		return true;
 	}
 
