@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,6 +51,11 @@ public class HorarioInterceptor implements HandlerInterceptor {
 			ModelAndView modelAndView) throws Exception {
 		//Recogemos una vez finalizado correctamente el método handler el mensaje y lo añadimos a la vista
 		String mensaje = (String) request.getAttribute("mensaje");
-		modelAndView.addObject("horario",mensaje);
+		
+		//Para evitar el error NullPointerException cuando el interceptor es lanzado por algún regurso, se puede comprobar los
+		//parámetros "modelAndView" y "handler"
+		if(modelAndView!=null && handler instanceof HandlerMethod) {
+			modelAndView.addObject("horario",mensaje);
+		}
 	}
 }

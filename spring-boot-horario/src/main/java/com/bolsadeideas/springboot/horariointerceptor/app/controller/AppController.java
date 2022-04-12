@@ -26,7 +26,6 @@ public class AppController {
 	
 	@GetMapping({"/cerrado"})
 	public String cerrado(Model model) {
-		System.out.println("entro");
 		//Generamos mensaje para la vista
 		StringBuilder mensaje = new StringBuilder("Cerrado, por favos visítenos desde las ");
 		mensaje.append(apertura);
