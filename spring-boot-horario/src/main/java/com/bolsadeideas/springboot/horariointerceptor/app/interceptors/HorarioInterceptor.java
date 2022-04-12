@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-@Component
+@Component("horario")
 public class HorarioInterceptor implements HandlerInterceptor {
 
 	@Value("${config.horario.apertura}")
@@ -41,7 +41,7 @@ public class HorarioInterceptor implements HandlerInterceptor {
 			return true;
 		}
 		//Esta fuera del horario
-		response.sendRedirect(request.getContextPath().concat("/cerrado"));
+		response.sendRedirect(request.getContextPath().concat("/control/cerrado"));
 		return false;
 	}
 
