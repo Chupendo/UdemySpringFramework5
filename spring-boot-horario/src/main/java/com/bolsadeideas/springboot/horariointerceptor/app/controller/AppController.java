@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AppController {
 
 	// Metodo handler
-	@GetMapping("/")
+	@GetMapping({"/","index"})
 	public String index(Model model) {
 		model.addAttribute("titulo", "Bienvenido al horario de atención a clientes");
 
