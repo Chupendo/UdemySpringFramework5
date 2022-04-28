@@ -18,4 +18,13 @@ public class ErrorHandlerController {
 		model.addAttribute("timestamp",new Date());
 		return "error/aritmetica";
 	}
+	
+	@ExceptionHandler(NumberFormatException.class)
+	public String numberFormatError(Exception ex,Model model) {
+		model.addAttribute("error","Error al combertir el dato a entero");
+		model.addAttribute("message", ex.getMessage());
+		model.addAttribute("status",HttpStatus.INTERNAL_SERVER_ERROR.value());
+		model.addAttribute("timestamp",new Date());
+		return "error/numberFormat";
+	}
 }
