@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1 th:text="${titulo}">Título principal de la página</h1>
+<hr>
+<ul>
+<li th:text="${usuario.id}"></li>
+<li th:text="${usuario.nombre}"></li>
+<li th:text="${usuario.apellido}"></li>
+</ul>
+</body>
+</html>
