@@ -1,5 +1,7 @@
 package com.bolsadeideas.springboot.error.app.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +27,11 @@ public class AppController {
 	
 	@GetMapping("/ver/{id}")
 	public String ver(@PathVariable Integer id, Model model) {
-		Usuario usuario  = daoUsuario.obtnerPorId(id);
-		if(usuario==null) {
+		//Usuario usuario  = daoUsuario.obtenerPorId(id);
+		/*if(usuario==null) {
 			throw new UserNotFoundException(id.toString());
-		}
+		}*/
+		Usuario usuario = daoUsuario.obtenerPorIdOptional(id).orElseThrow(()-> new UserNotFoundException(id.toString()));
 		model.addAttribute("usuario",usuario);
 		model.addAttribute("titulo","Detalle usuario: ".concat(usuario.getNombre()));
 		return "ver";

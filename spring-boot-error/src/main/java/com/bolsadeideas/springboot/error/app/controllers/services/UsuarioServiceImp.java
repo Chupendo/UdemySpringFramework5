@@ -2,6 +2,7 @@ package com.bolsadeideas.springboot.error.app.controllers.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -34,7 +35,7 @@ public class UsuarioServiceImp implements IUsuarioService {
 	}
 
 	@Override
-	public Usuario obtnerPorId(Integer id) {
+	public Usuario obtenerPorId(Integer id) {
 		Usuario resultado = null;
 		/*
 		 * for (Usuario u: this.lista){
@@ -46,6 +47,12 @@ public class UsuarioServiceImp implements IUsuarioService {
 		 * */
 		resultado = lista.stream().filter(f->f.getId().equals(id)).findFirst().orElse(null);
 		return resultado;
+	}
+
+	@Override
+	public Optional<Usuario> obtenerPorIdOptional(Integer id) {
+		Usuario usuario = this.obtenerPorId(id);
+		return Optional.ofNullable(usuario);
 	}
 
 }
