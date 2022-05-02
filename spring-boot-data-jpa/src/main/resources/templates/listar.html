@@ -9,11 +9,11 @@
 <table>
 <thead>
 	<tr>
-		<td>id</td>
-		<td>nombre</td>
-		<td>apellido</td>
-		<td>email</td>
-		<td>fecha</td>
+		<th>id</th>
+		<th>nombre</th>
+		<th>apellido</th>
+		<th>email</th>
+		<th>fecha</th>
 	</tr>
 </thead>
 	<tbody>
@@ -22,7 +22,7 @@
 			<td th:text="${cliente.nombre}"></td>
 			<td th:text="${cliente.apellido}"></td>
 			<td th:text="${cliente.email}"></td>
-			<td th:text="${cliente.fecha}"></td>
+			<td th:text="${cliente.createAt}"></td>
 		</tr>
 	</tbody>
 </table>

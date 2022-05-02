@@ -18,8 +18,9 @@ public class ClienteDaoImpl implements IClienteDao {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly=true)//Envuelve el método como una transación
-	@Override
+	@Override//
 	public List<Cliente> findAll() {
-		return em.createQuery("from Clientes").getResultList();
+		//Importae: Mapea a la entiddad no a la talba
+		return em.createQuery("from Cliente").getResultList();
 	}
 }
