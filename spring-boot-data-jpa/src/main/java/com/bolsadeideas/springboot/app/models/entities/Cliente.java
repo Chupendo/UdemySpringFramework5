@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="clientes")//nombre de la ta bala en bbdd
 public class Cliente implements Serializable {
@@ -31,6 +33,7 @@ public class Cliente implements Serializable {
 	
 	@Column(name="create_at")
 	@Temporal(TemporalType.DATE)//Formato de la fecha
+	@DateTimeFormat(pattern="yyy-MM-dd") //Validaidon de formato para la fecha
 	private Date createAt;
 
 	/**
@@ -116,6 +119,7 @@ public class Cliente implements Serializable {
 	 */
 	@PrePersist
 	public void prePersit() {
-		this.createAt = new Date();
+		System.out.println("fecha introduicda en el formulario");
+		//this.createAt = new Date();
 	}
 }
