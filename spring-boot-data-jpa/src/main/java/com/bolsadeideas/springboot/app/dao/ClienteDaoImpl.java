@@ -23,4 +23,10 @@ public class ClienteDaoImpl implements IClienteDao {
 		//Importae: Mapea a la entiddad no a la talba
 		return em.createQuery("from Cliente").getResultList();
 	}
+
+	@Transactional(readOnly = false)
+	@Override
+	public void save(Cliente cliente) {
+		em.persist(cliente);
+	}
 }
