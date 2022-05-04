@@ -1,4 +1,4 @@
-package com.bolsadeideas.springboot.app.dao;
+package com.bolsadeideas.springboot.app.models.dao;
 
 import java.util.List;
 
