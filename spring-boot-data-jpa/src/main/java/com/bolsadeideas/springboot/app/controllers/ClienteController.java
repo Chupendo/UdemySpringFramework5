@@ -20,20 +20,24 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.bolsadeideas.springboot.app.models.dao.IClienteDao;
 import com.bolsadeideas.springboot.app.models.entities.Cliente;
+import com.bolsadeideas.springboot.app.models.service.IClienteService;
 
 @Controller
 @SessionAttributes("cliente")
 public class ClienteController {
 
+	
 	@Autowired //Busca un componente o bean que implmente la IClienteDao
 			   //La clase ClienteDaoImpl, implmenta la interfaz IClienteDao
 			   //y esta registrado por medio de "@Repositoy"
-	private IClienteDao clienteDao;
+	//private IClienteDao clienteDao;
+	private IClienteService clienteSerivce;
 	
 	@RequestMapping(value="/listar",method = RequestMethod.GET)
 	public String listar(Model model) {
 		model.addAttribute("titulo","Listado de clientes");
-		model.addAttribute("clientes",clienteDao.findAll());
+		//model.addAttribute("clientes",clienteDao.findAll());
+		model.addAttribute("clientes",clienteSerivce.findAll());
 		return "listar";
 	}
 	
@@ -53,7 +57,8 @@ public class ClienteController {
 			return "form";
 		}
 		System.out.println("cliente= "+cliente);
-		clienteDao.save(cliente);
+		//clienteDao.save(cliente);
+		clienteSerivce.save(cliente);
 		status.setComplete(); //Limpia los datos de la sesion
 		return "redirect:/listar";
 	}
@@ -62,7 +67,8 @@ public class ClienteController {
 	public String editar(@PathVariable(value="id") Long id,Map<String,Object> model) {
 		Cliente cliente = null;
 		if(id>0) {
-			cliente = clienteDao.findOne(id);
+			//cliente = clienteDao.findOne(id);
+			clienteSerivce.findOne(id);
 		}else {
 			return "redirect:/listar";
 		}
@@ -77,7 +83,8 @@ public class ClienteController {
 	@RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
 	public String eliminar(@PathVariable(value="id") Long id,Map<String,Object> model) {
 		if(id>0) {
-			clienteDao.delete(id);
+			//clienteDao.delete(id);
+			clienteSerivce.delete(id);
 		}
 
 		return "redirect:/listar";
