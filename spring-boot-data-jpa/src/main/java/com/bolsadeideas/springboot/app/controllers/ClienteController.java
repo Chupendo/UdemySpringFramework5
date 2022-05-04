@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.bolsadeideas.springboot.app.dao.IClienteDao;
 import com.bolsadeideas.springboot.app.models.entities.Cliente;
 
 @Controller
+@SessionAttributes("cliente")
 public class ClienteController {
 
 	@Autowired //Busca un componente o bean que implmente la IClienteDao
@@ -43,13 +46,14 @@ public class ClienteController {
 	}
 
 	@RequestMapping(value="/form", method = RequestMethod.POST)
-	public String guardar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult result, Model model) {
+	public String guardar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult result, Model model, SessionStatus status) {
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de cliente");
 			return "form";
 		}
 		System.out.println("cliente= "+cliente);
 		clienteDao.save(cliente);
+		status.setComplete(); //Limpia los datos de la sesion
 		return "redirect:/listar";
 	}
 	
