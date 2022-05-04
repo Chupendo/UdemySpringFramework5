@@ -17,14 +17,14 @@ public class ClienteDaoImpl implements IClienteDao {
 	private EntityManager em;
 	
 	@SuppressWarnings("unchecked")
-	@Transactional(readOnly=true)//Envuelve el método como una transación
+	//@Transactional(readOnly=true)//Envuelve el método como una transación
 	@Override//
 	public List<Cliente> findAll() {
 		//Importae: Mapea a la entiddad no a la talba
 		return em.createQuery("from Cliente").getResultList();
 	}
 
-	@Transactional(readOnly = false)
+	//@Transactional(readOnly = false)
 	@Override
 	public void save(Cliente cliente) {
 		if(cliente.getId()!=null && cliente.getId()>0) {
@@ -37,13 +37,13 @@ public class ClienteDaoImpl implements IClienteDao {
 		
 	}
 
-	@Transactional(readOnly=true)
+	//@Transactional(readOnly=true)
 	@Override
 	public Cliente findOne(Long id) {
 		return em.find(Cliente.class, id);
 	}
 
-	@Transactional(readOnly=false)
+	//@Transactional(readOnly=false)
 	@Override
 	public void delete(Long id) {
 		//1º Buscamos el cliente a e liminar
