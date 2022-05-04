@@ -42,4 +42,19 @@ public class ClienteDaoImpl implements IClienteDao {
 	public Cliente findOne(Long id) {
 		return em.find(Cliente.class, id);
 	}
+
+	@Transactional(readOnly=false)
+	@Override
+	public void delete(Long id) {
+		//1º Buscamos el cliente a e liminar
+		Cliente cliente = this.findOne(id);
+		//2º Cliente esta en la base de datos?
+		if(cliente!=null) {
+			//Si, entonces elimnalo
+			em.remove(cliente);
+		}
+		
+		//opcion con menos codigo
+		//em.remove(this.findOne(id));
+	}
 }

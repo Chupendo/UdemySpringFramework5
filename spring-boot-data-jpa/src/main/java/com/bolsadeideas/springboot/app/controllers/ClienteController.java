@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,4 +71,16 @@ public class ClienteController {
 		model.put("titulo", "Formulario de cliente");
 		return "form";
 	}
+	
+	
+	//@DeleteMapping(value="/delete/{id}")
+	@RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
+	public String eliminar(@PathVariable(value="id") Long id,Map<String,Object> model) {
+		if(id>0) {
+			clienteDao.delete(id);
+		}
+
+		return "redirect:/listar";
+	}
+	
 }
