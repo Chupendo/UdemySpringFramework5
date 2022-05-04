@@ -56,7 +56,7 @@ public class ClienteController {
 			model.addAttribute("titulo", "Formulario de cliente");
 			return "form";
 		}
-		System.out.println("cliente= "+cliente);
+		//System.out.println("cliente= "+cliente);
 		//clienteDao.save(cliente);
 		clienteSerivce.save(cliente);
 		status.setComplete(); //Limpia los datos de la sesion
@@ -68,11 +68,10 @@ public class ClienteController {
 		Cliente cliente = null;
 		if(id>0) {
 			//cliente = clienteDao.findOne(id);
-			clienteSerivce.findOne(id);
+			cliente = clienteSerivce.findOne(id);
 		}else {
 			return "redirect:/listar";
 		}
-		
 		model.put("cliente", cliente);
 		model.put("titulo", "Formulario de cliente");
 		return "form";
