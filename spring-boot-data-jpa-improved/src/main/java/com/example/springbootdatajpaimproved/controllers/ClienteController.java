@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -19,8 +20,6 @@ public class ClienteController {
     @Autowired
     IClienteService clientService;
 
-
-
     @RequestMapping(value="/form", method = RequestMethod.GET)
     public String showForm(Model model){
         model.addAttribute("client",new Cliente());
@@ -28,30 +27,45 @@ public class ClienteController {
         return "form";
     }
 
-
     @RequestMapping(value="/form",method = RequestMethod.POST)
-    public String saveClient(@Valid @ModelAttribute("client") Cliente cliente, BindingResult result, Model model, SessionStatus status){
+    public String saveClient(@Valid @ModelAttribute("client") Cliente cliente, BindingResult result, Model model, SessionStatus status,
+                             RedirectAttributes redirectAttrs){
         if(result.hasErrors()){
-            if(cliente.getId()!=null)
-                model.addAttribute("title","Actualizando Cliente");
-            else
-                model.addAttribute("title","Nuevo Cliente");
+            if(cliente.getId()!=null) {
+                model.addAttribute("title", "Actualizando Cliente");
+            }else {
+                model.addAttribute("title", "Nuevo Cliente");
+            }
             return "form";
         }
+        redirectAttrs
+                .addFlashAttribute("mensaje", "Cliente creado/acutalizado correctamente")
+                .addFlashAttribute("clase", "success");
         clientService.save(cliente);
         status.setComplete();
         return "redirect:/list";
     }
 
     @RequestMapping(value="/form/{id}", method = RequestMethod.GET)
-    public String updateClient(@PathVariable("id") Long id, Model model){
-        model.addAttribute("client",clientService.findOneBy(id));
-        model.addAttribute("title","Actualizando Cliente");
-        return "form";
+    public String updateClient(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttrs){
+        Cliente c = clientService.findOneBy(id);
+        if(c!=null) {
+            model.addAttribute("client", clientService.findOneBy(id));
+            model.addAttribute("title", "Actualizando Cliente");
+
+            return "form";
+        }else{
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "Cliente no enconrado")
+                    .addFlashAttribute("clase", "warning");
+            model.addAttribute("error1","Client do not find");
+            return "redirect:/list";
+        }
+
     }
 
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
-    public String deleteClient(@PathVariable("id") Long id, Map<String,Object> model){
+    public String deleteClient(@PathVariable("id") Long id){
         clientService.deleteOneById(id);
         return "redirect:/list";
     }
