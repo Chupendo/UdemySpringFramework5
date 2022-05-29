@@ -3,6 +3,9 @@ package com.example.springbootdatajpaimproved.controllers;
 import com.example.springbootdatajpaimproved.entity.Cliente;
 import com.example.springbootdatajpaimproved.service.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -75,5 +78,18 @@ public class ClienteController {
         model.put("lClients", clientService.findAll());
         model.put("title","Listado de Clientes");
         return "listar";
+    }
+
+    @RequestMapping(value="/list_pageable",method = RequestMethod.GET)
+    public String showAllClientsPageable(@RequestParam(name="page", defaultValue ="0") int page, Map<String,Object> model){
+        //4 registros por pagina,
+        Pageable pageRequest = PageRequest.of(page,4);
+        //Obtenemos la lista paginda
+        Page<Cliente> clientes = clientService.findAll(pageRequest);
+
+        model.put("lClients",clientes );
+        model.put("title","Listado de Clientes");
+
+        return "listar_pageable";
     }
 }

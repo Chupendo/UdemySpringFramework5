@@ -3,6 +3,8 @@ package com.example.springbootdatajpaimproved.service;
 import com.example.springbootdatajpaimproved.dao.IClienteJPADao;
 import com.example.springbootdatajpaimproved.entity.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +19,13 @@ public class ClienteServiceImpl implements IClienteService{
     @Override
     @Transactional(readOnly = true)
     public List<Cliente> findAll() {
-        return clienteJPA.findAll();
+        return (List<Cliente>) clienteJPA.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Cliente> findAll(Pageable pageable) {
+        return clienteJPA.findAll(pageable);
     }
 
     @Override
