@@ -9,6 +9,7 @@
 	<div th:if="${mensaje != null}"	 th:text="${mensaje}" th:class="'alert alert-' + (${clase != null} ? ${clase} : info)"	 >
 	</div>
 	<div class="container py-4">
+		<div  th:replace="common/tmp_flashMessage :: sms_flash"></div>
 		<div class="card bg-light">
 			<h4 class="card-header text-primary border border-success border-top-0 border-end-0 border-start-0" th:text="${title}"></h4>
 			<div class="card-body">

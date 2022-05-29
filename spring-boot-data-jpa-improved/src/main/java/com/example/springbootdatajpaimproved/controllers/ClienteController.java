@@ -38,9 +38,17 @@ public class ClienteController {
             }
             return "form";
         }
-        redirectAttrs
-                .addFlashAttribute("mensaje", "Cliente creado/acutalizado correctamente")
-                .addFlashAttribute("clase", "success");
+        if(cliente.getId()==0)
+        {
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "El id del cliene no puede ser 0")
+                    .addFlashAttribute("clase", "error");
+        }else{
+            redirectAttrs
+                    .addFlashAttribute("mensaje", "Cliente creado/acutalizado correctamente")
+                    .addFlashAttribute("clase", "success");
+        }
+
         clientService.save(cliente);
         status.setComplete();
         return "redirect:/list";
@@ -56,7 +64,7 @@ public class ClienteController {
             return "form";
         }else{
             redirectAttrs
-                    .addFlashAttribute("mensaje", "Cliente no enconrado")
+                    .addFlashAttribute("mensaje", "Cliente no encontrado")
                     .addFlashAttribute("clase", "warning");
             model.addAttribute("error1","Client do not find");
             return "redirect:/list";
@@ -65,7 +73,10 @@ public class ClienteController {
     }
 
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
-    public String deleteClient(@PathVariable("id") Long id){
+    public String deleteClient(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+        redirectAttributes
+                .addFlashAttribute("mensaje", "Cliente borrado correctamente")
+                .addFlashAttribute("clase", "warning");
         clientService.deleteOneById(id);
         return "redirect:/list";
     }
