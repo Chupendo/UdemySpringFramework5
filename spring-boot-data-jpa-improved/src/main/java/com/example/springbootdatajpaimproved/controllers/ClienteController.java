@@ -2,6 +2,7 @@ package com.example.springbootdatajpaimproved.controllers;
 
 import com.example.springbootdatajpaimproved.entity.Cliente;
 import com.example.springbootdatajpaimproved.service.IClienteService;
+import com.example.springbootdatajpaimproved.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -86,10 +87,12 @@ public class ClienteController {
         Pageable pageRequest = PageRequest.of(page,4);
         //Obtenemos la lista paginda
         Page<Cliente> clientes = clientService.findAll(pageRequest);
+        //Generamos el paginador
+        PageRender<Cliente> pageRender = new PageRender<Cliente>("/list_pageable",clientes);
 
         model.put("lClients",clientes );
         model.put("title","Listado de Clientes");
-
+        model.put("page",pageRender);
         return "listar_pageable";
     }
 }

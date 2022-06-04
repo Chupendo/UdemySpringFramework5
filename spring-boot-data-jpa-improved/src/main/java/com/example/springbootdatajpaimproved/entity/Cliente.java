@@ -21,7 +21,7 @@ public class Cliente implements Serializable {
 
     @NotEmpty
     @Column(name="nombre_cliente",nullable = false,length =40)
-    @Size(min=2,max=8)
+    @Size(min=2,max=10)
     private String nombre;
 
     @NotEmpty
