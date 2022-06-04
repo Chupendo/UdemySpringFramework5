@@ -15,13 +15,16 @@ public class PageRender<T> {
     private int actualPage;
 
     public PageRender(String url,Page<T> page){
-        int desde,hasta;
+        int desde=0,hasta=0;
         this.url = url;
         this.page = page;
         this.totalPage = page.getTotalPages();
         this.numElementosPorPagina = page.getSize();
         this.actualPage = page.getNumber() + 1 ; //Pagina actual: el offset es 0, pere se ha demostrar desde 1 hasta X.
         this.lPages = new ArrayList<PageItem>();
+
+        //
+        System.out.println("page"+page.toString());
 
         //Realizmaos el cálculo:
         if(totalPage<=numElementosPorPagina){
@@ -41,14 +44,14 @@ public class PageRender<T> {
             }else if(actualPage>= totalPage - numElementosPorPagina/2){
                 //End range: Muestra desde
                 desde = totalPage - numElementosPorPagina + 1;
-                hasta = totalPage;
+                hasta = numElementosPorPagina;
             }else{
                 //Intermedy range
                 desde = actualPage - numElementosPorPagina/2;
                 hasta = numElementosPorPagina;
             }
         }
-
+        System.out.println("desde= "+desde+", hasta= "+hasta);
         //Rellenamos las paginas con cada uno de los times
         for(int i=0;i<hasta;i++){
             lPages.add(new PageItem(desde+i,actualPage == desde+i));
