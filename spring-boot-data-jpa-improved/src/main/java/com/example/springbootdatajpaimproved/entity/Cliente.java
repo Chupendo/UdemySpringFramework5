@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.text.Normalizer;
 import java.util.Date;
 
 @Entity
@@ -37,6 +38,7 @@ public class Cliente implements Serializable {
     @DateTimeFormat(pattern="yyy-MM-dd") //Validaidon de formato para la fecha
     private Date createAt;
 
+    private String foto;
     /**
      * @return the id
      */
@@ -114,6 +116,14 @@ public class Cliente implements Serializable {
         return serialVersionUID;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     /**
      * Agrega la fecha de creacion antes de realizar la persistencia
      * de forma automática
@@ -122,5 +132,10 @@ public class Cliente implements Serializable {
     public void prePersit() {
         System.out.println("fecha introduicda en el formulario");
         //this.createAt = new Date();
+    }
+
+    public String normalizeString(String str){
+        str= Normalizer.normalize(str,Normalizer.Form.NFKD);
+        return str.replaceAll("[^a-z,^A-Z,^0-9]", "").toLowerCase();
     }
 }

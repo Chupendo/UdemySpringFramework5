@@ -3,7 +3,7 @@
 <head th:replace="common/layout :: head">
 </head>
 <body>
-	<header th:replace="common/tmp_header :: nav_list">
+	<header th:replace="common/tmp_header :: nav_list_page">
 	</header>
 	<!-- mensaje flash: se muestra solo una vez -->
 	<div th:if="${mensaje != null}"	 th:text="${mensaje}" th:class="'alert alert-' + (${clase != null} ? ${clase} : info)"	 >

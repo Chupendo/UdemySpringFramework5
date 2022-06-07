@@ -12,9 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 @Controller
@@ -32,7 +38,7 @@ public class ClienteController {
     }
 
     @RequestMapping(value="/form",method = RequestMethod.POST)
-    public String saveClient(@Valid @ModelAttribute("client") Cliente cliente, BindingResult result, Model model, SessionStatus status,
+    public String saveClient(@Valid @ModelAttribute("client") Cliente cliente, BindingResult result,@RequestParam("file") MultipartFile file, Model model, SessionStatus status,
                              RedirectAttributes redirectAttrs){
         if(result.hasErrors()){
             if(cliente.getId()!=null) {
@@ -42,6 +48,46 @@ public class ClienteController {
             }
             return "form";
         }
+        if(!file.isEmpty()){
+            //Obtenemos el direcotrio de los recursos
+            Path directorioRecursos = Paths.get("src//main//resources//static//uploads");
+            StringBuilder rootPath = new StringBuilder(directorioRecursos.toAbsolutePath().toString());
+            try {
+                byte[] bytes = file.getBytes();
+                //Comprobamos si exsite el direcotior de recursos del cliente
+                String pathDirecotrioRecursosCliente = rootPath.append("//"+cliente.getId()+cliente.normalizeString(cliente.getNombre())).toString();
+                System.out.println(pathDirecotrioRecursosCliente);
+                File directorioRecursosCliente = new File(pathDirecotrioRecursosCliente);
+                if (!directorioRecursosCliente.exists()) {
+                    //Si no existe lo creamos
+                    if (directorioRecursosCliente.mkdirs()) {
+                        System.out.println("Directorio creado");
+                    } else {
+                        System.out.println("Error al crear directorio");
+                    }
+                }
+
+                //Si se creó o existe correctamente se guarda el fichero
+                if(directorioRecursosCliente.exists()){
+                    rootPath.append("//"+file.getOriginalFilename());
+                    Path rutaCompleta = Paths.get(rootPath.toString());
+                    Files.write(rutaCompleta,bytes);//Creando y guarndo la imange
+                }
+
+
+
+                redirectAttrs
+                        .addFlashAttribute("foto","Has subido correcatmente: "+file.getOriginalFilename())
+                        .addFlashAttribute("clase","info");
+
+                cliente.setFoto(file.getOriginalFilename());
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        //Mensajes Flash
         redirectAttrs
                 .addFlashAttribute("mensaje", "Cliente creado/acutalizado correctamente")
                 .addFlashAttribute("clase", "success");
