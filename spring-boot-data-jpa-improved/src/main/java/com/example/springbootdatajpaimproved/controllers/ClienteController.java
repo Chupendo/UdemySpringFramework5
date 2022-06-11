@@ -141,4 +141,19 @@ public class ClienteController {
         model.put("page",pageRender);
         return "listar_pageable";
     }
+
+    @GetMapping(value = "/ver/{id}")
+    public String verDetalle(@PathVariable("id") Long id, Map<String, Object> model,RedirectAttributes flash){
+        Cliente cliente = clientService.findOneBy(id);
+        if(cliente==null){
+            flash.addFlashAttribute("mensaje","El cliente no existe en la base de datos")
+                    .addFlashAttribute("clase","warning");
+            return "redirect:/list";
+        }
+
+        System.out.println(cliente.toString());
+        model.put("client",cliente);
+        model.put("title","Detalle cliente de "+cliente.getNombre());
+        return "ver";
+    }
 }

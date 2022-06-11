@@ -18,9 +18,10 @@
 				</h4>
 
 				<table class="table table-striped table-bordered">
-				<thead>
+					<thead>
 					<tr>
 						<th>id</th>
+						<th>detalle</th>
 						<th>nombre</th>
 						<th>apellido</th>
 						<th>email</th>
@@ -28,9 +29,10 @@
 						<th>Editar</th>
 						<th>Eliminar</th>
 					</tr>
-				</thead>
-				<tbody>
+					</thead>
+					<tbody>
 					<tr th:each="cliente: ${lClients}">
+						<td><a th:href="@{'/ver/'+${cliente.id}}" th:text="Ver"></a> </td>
 						<td th:text="${cliente.id}"></td> <!--  va a llamar al metodo getId() -->
 						<td th:text="${cliente.nombre}"></td>
 						<td th:text="${cliente.apellido}"></td>
@@ -38,11 +40,10 @@
 						<td th:text="${cliente.createAt}"></td>
 						<td> <a class="btn btn-success btn-xs" th:href="@{'/form/' + ${cliente.id}}" th:text="'Editar'">Editar</a> </td>
 						<td> <a class="btn btn-danger btn-xs" th:href="@{'/delete/' + ${cliente.id}}" th:text="'Eliminar'"
-							onclick="return confirm('Estas seguro que queires eliminar?');">Eliminar</a> </td>
+								onclick="return confirm('Estas seguro que queires eliminar?');">Eliminar</a> </td>
 					</tr>
-				</tbody>
-			</table>
-				<nav th:replace="common/tmp_paginator :: cliente_paginator">	</nav>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

@@ -23,6 +23,7 @@
 				<thead>
 					<tr>
 						<th>id</th>
+						<th>detalle</th>
 						<th>nombre</th>
 						<th>apellido</th>
 						<th>email</th>
@@ -33,6 +34,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="cliente: ${lClients}">
+						<td><a th:href="@{'/ver/'+${cliente.id}}" th:text="Ver"></a> </td>
 						<td th:text="${cliente.id}"></td> <!--  va a llamar al metodo getId() -->
 						<td th:text="${cliente.nombre}"></td>
 						<td th:text="${cliente.apellido}"></td>
