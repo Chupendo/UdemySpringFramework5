@@ -50,14 +50,16 @@ public class ClienteController {
         }
         if(!file.isEmpty()){
             //Obtenemos el direcotrio de los recursos
-            Path directorioRecursos = Paths.get("src//main//resources//static//uploads");
+            //Path directorioRecursos = Paths.get("src//main//resources//static//uploads"); //Directorio interono
+            Path directorioRecursos = Paths.get("G:\\apps\\Spring\\workspace\\others\\UdemySpringFramework5\\spring-boot-data-jpa-improved\\temp\\uploads\\"); //Directorio interono
             StringBuilder rootPath = new StringBuilder(directorioRecursos.toAbsolutePath().toString());
             try {
                 byte[] bytes = file.getBytes();
                 //Comprobamos si exsite el direcotior de recursos del cliente
-                String pathDirecotrioRecursosCliente = rootPath.append("//"+cliente.getId()+cliente.normalizeString(cliente.getNombre())).toString();
-                System.out.println(pathDirecotrioRecursosCliente);
-                File directorioRecursosCliente = new File(pathDirecotrioRecursosCliente);
+                //String pathDirecotrioRecursosCliente = rootPath.append("//"+cliente.getId()+cliente.normalizeString(cliente.getNombre())).toString();
+                //System.out.println(pathDirecotrioRecursosCliente);
+                //File directorioRecursosCliente = new File(pathDirecotrioRecursosCliente);
+                File directorioRecursosCliente = new File(rootPath.toString());
                 if (!directorioRecursosCliente.exists()) {
                     //Si no existe lo creamos
                     if (directorioRecursosCliente.mkdirs()) {
@@ -69,8 +71,10 @@ public class ClienteController {
 
                 //Si se creó o existe correctamente se guarda el fichero
                 if(directorioRecursosCliente.exists()){
+                    //rootPath.append("//"+file.getOriginalFilename());
                     rootPath.append("//"+file.getOriginalFilename());
                     Path rutaCompleta = Paths.get(rootPath.toString());
+                    System.out.println(rutaCompleta);
                     Files.write(rutaCompleta,bytes);//Creando y guarndo la imange
                 }
 
