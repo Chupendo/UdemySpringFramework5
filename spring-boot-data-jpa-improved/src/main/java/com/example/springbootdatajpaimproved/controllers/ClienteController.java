@@ -3,6 +3,8 @@ package com.example.springbootdatajpaimproved.controllers;
 import com.example.springbootdatajpaimproved.entity.Cliente;
 import com.example.springbootdatajpaimproved.service.IClienteService;
 import com.example.springbootdatajpaimproved.util.paginator.PageRender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @SessionAttributes("client")
@@ -30,6 +33,7 @@ public class ClienteController {
     @Autowired
     IClienteService clientService;
 
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     @RequestMapping(value="/form", method = RequestMethod.GET)
     public String showForm(Model model){
         model.addAttribute("client",new Cliente());
@@ -49,17 +53,20 @@ public class ClienteController {
             return "form";
         }
         if(!file.isEmpty()){
+            String uniqueFilename = UUID.randomUUID().toString();
+            String nameFile = uniqueFilename+"_"+file.getOriginalFilename();
+            /*****/
             //Obtenemos el direcotrio de los recursos
-            //Path directorioRecursos = Paths.get("src//main//resources//static//uploads"); //Directorio interono
-            Path directorioRecursos = Paths.get("G:\\apps\\Spring\\workspace\\others\\UdemySpringFramework5\\spring-boot-data-jpa-improved\\temp\\uploads\\"); //Directorio interono
-            StringBuilder rootPath = new StringBuilder(directorioRecursos.toAbsolutePath().toString());
+            /*****/
+            Path rootPath = Paths.get("uploads"); //Directorio externo en raiz + nombre
+            Path rootAbsolutePath = rootPath.toAbsolutePath();
+            log.info("rootPath: "+rootPath);
+            log.info("rootAbsolutePath: "+rootAbsolutePath);
+            /*****/
+            //StringBuilder rootPath = new StringBuilder(directorioRecursos.toAbsolutePath().toString());
             try {
-                byte[] bytes = file.getBytes();
                 //Comprobamos si exsite el direcotior de recursos del cliente
-                //String pathDirecotrioRecursosCliente = rootPath.append("//"+cliente.getId()+cliente.normalizeString(cliente.getNombre())).toString();
-                //System.out.println(pathDirecotrioRecursosCliente);
-                //File directorioRecursosCliente = new File(pathDirecotrioRecursosCliente);
-                File directorioRecursosCliente = new File(rootPath.toString());
+                File directorioRecursosCliente = new File(rootAbsolutePath.toAbsolutePath().toString());
                 if (!directorioRecursosCliente.exists()) {
                     //Si no existe lo creamos
                     if (directorioRecursosCliente.mkdirs()) {
@@ -71,20 +78,20 @@ public class ClienteController {
 
                 //Si se creó o existe correctamente se guarda el fichero
                 if(directorioRecursosCliente.exists()){
-                    //rootPath.append("//"+file.getOriginalFilename());
-                    rootPath.append("//"+file.getOriginalFilename());
-                    Path rutaCompleta = Paths.get(rootPath.toString());
-                    System.out.println(rutaCompleta);
-                    Files.write(rutaCompleta,bytes);//Creando y guarndo la imange
+
+                    Files.copy(file.getInputStream(),
+                            rootAbsolutePath.resolve(nameFile)
+                    );
+                    log.info("cliente foto: "+nameFile);
+                    cliente.setFoto(nameFile);
+
                 }
 
-
-
                 redirectAttrs
-                        .addFlashAttribute("foto","Has subido correcatmente: "+file.getOriginalFilename())
+                        .addFlashAttribute("foto","Has subido correcatmente: "+cliente.getFoto())
                         .addFlashAttribute("clase","info");
 
-                cliente.setFoto(file.getOriginalFilename());
+
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -154,7 +161,7 @@ public class ClienteController {
                     .addFlashAttribute("clase","warning");
             return "redirect:/list";
         }
-
+        log.info("verDetalle: "+cliente.getFoto());
         System.out.println(cliente.toString());
         model.put("client",cliente);
         model.put("title","Detalle cliente de "+cliente.getNombre());
