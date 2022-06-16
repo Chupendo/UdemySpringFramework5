@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 @Configuration
 public class MvcConfing implements WebMvcConfigurer {
-
+/*
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -21,4 +21,6 @@ public class MvcConfing implements WebMvcConfigurer {
                 .addResourceLocations(resourcePath); //Ruta fisica
         log.info(resourcePath);
     }
+*/
 }
+
