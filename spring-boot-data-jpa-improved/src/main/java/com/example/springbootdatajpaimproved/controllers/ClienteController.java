@@ -57,6 +57,7 @@ public class ClienteController {
             }
             return "form";
         }
+
         if(!file.isEmpty()){
             String uniqueFilename = UUID.randomUUID().toString();
             String nameFile = uniqueFilename+"_"+file.getOriginalFilename();
@@ -107,6 +108,16 @@ public class ClienteController {
         redirectAttrs
                 .addFlashAttribute("mensaje", "Cliente creado/acutalizado correctamente")
                 .addFlashAttribute("clase", "success");
+
+        //Se comprueba si tiene imange y se borra
+        Cliente clienteViejo = clientService.findOneBy(cliente.getId());
+        if(clienteViejo.getFoto()!=null && !clienteViejo.getFoto().equals(cliente.getFoto())){
+            Path rootAbsoluteFile = Paths.get("uploads").resolve(clienteViejo.getFoto()).toAbsolutePath();
+            File img = rootAbsoluteFile.toFile();
+            if(img.exists() && img.canRead()){
+                img.delete();
+            }
+        }
         clientService.save(cliente);
         status.setComplete();
         return "redirect:/list";
@@ -132,7 +143,24 @@ public class ClienteController {
 
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
     public String deleteClient(@PathVariable("id") Long id){
-        clientService.deleteOneById(id);
+        Cliente cliente = clientService.findOneBy(id);
+        if(cliente!=null){
+            clientService.deleteOneById(id);
+            if(!cliente.getFoto().isEmpty()){
+                String nameFile = cliente.getFoto();
+                Path rootAbsolutePath = Paths.get("uploads").resolve(nameFile).toAbsolutePath();
+                File archivo = rootAbsolutePath.toFile();
+                if(archivo.exists() && archivo.canRead()){
+                    archivo.delete();
+                }
+            }
+        }
+
+
+
+
+
+
         return "redirect:/list";
     }
 
