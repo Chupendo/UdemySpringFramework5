@@ -2,12 +2,12 @@ package com.example.springbootdatajpaimproved.controllers;
 
 import com.example.springbootdatajpaimproved.entity.Cliente;
 import com.example.springbootdatajpaimproved.service.IClienteService;
+import com.example.springbootdatajpaimproved.service.IUploadsFileService;
 import com.example.springbootdatajpaimproved.util.paginator.PageRender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +38,8 @@ public class ClienteController {
     @Autowired
     IClienteService clientService;
 
+    @Autowired
+    IUploadsFileService uploadsFileService;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     @RequestMapping(value="/form", method = RequestMethod.GET)
     public String showForm(Model model){
@@ -59,50 +61,19 @@ public class ClienteController {
         }
 
         if(!file.isEmpty()){
-            String uniqueFilename = UUID.randomUUID().toString();
-            String nameFile = uniqueFilename+"_"+file.getOriginalFilename();
-            /*****/
-            //Obtenemos el direcotrio de los recursos
-            /*****/
-            Path rootPath = Paths.get("uploads"); //Directorio externo en raiz + nombre
-            Path rootAbsolutePath = rootPath.toAbsolutePath();
-            log.info("rootPath: "+rootPath);
-            log.info("rootAbsolutePath: "+rootAbsolutePath);
-            /*****/
-            //StringBuilder rootPath = new StringBuilder(directorioRecursos.toAbsolutePath().toString());
+            String nameFile = null;
             try {
-                //Comprobamos si exsite el direcotior de recursos del cliente
-                File directorioRecursosCliente = new File(rootAbsolutePath.toAbsolutePath().toString());
-                if (!directorioRecursosCliente.exists()) {
-                    //Si no existe lo creamos
-                    if (directorioRecursosCliente.mkdirs()) {
-                        System.out.println("Directorio creado");
-                    } else {
-                        System.out.println("Error al crear directorio");
-                    }
-                }
-
-                //Si se creó o existe correctamente se guarda el fichero
-                if(directorioRecursosCliente.exists()){
-
-                    Files.copy(file.getInputStream(),
-                            rootAbsolutePath.resolve(nameFile)
-                    );
-                    log.info("cliente foto: "+nameFile);
-                    cliente.setFoto(nameFile);
-
-                }
-
+                nameFile = uploadsFileService.copy(file);
+                log.info("cliente foto: "+nameFile);
+                cliente.setFoto(nameFile);
                 redirectAttrs
                         .addFlashAttribute("foto","Has subido correcatmente: "+cliente.getFoto())
                         .addFlashAttribute("clase","info");
-
-
-
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+
 
         //Mensajes Flash
         redirectAttrs
@@ -112,11 +83,10 @@ public class ClienteController {
         //Se comprueba si tiene imange y se borra
         Cliente clienteViejo = clientService.findOneBy(cliente.getId());
         if(clienteViejo.getFoto()!=null && !clienteViejo.getFoto().equals(cliente.getFoto())){
-            Path rootAbsoluteFile = Paths.get("uploads").resolve(clienteViejo.getFoto()).toAbsolutePath();
-            File img = rootAbsoluteFile.toFile();
-            if(img.exists() && img.canRead()){
-                img.delete();
+            if(uploadsFileService.delete(clienteViejo.getFoto())){
+                log.info("img borrada "+clienteViejo.getFoto());
             }
+
         }
         clientService.save(cliente);
         status.setComplete();
@@ -148,19 +118,9 @@ public class ClienteController {
             clientService.deleteOneById(id);
             if(!cliente.getFoto().isEmpty()){
                 String nameFile = cliente.getFoto();
-                Path rootAbsolutePath = Paths.get("uploads").resolve(nameFile).toAbsolutePath();
-                File archivo = rootAbsolutePath.toFile();
-                if(archivo.exists() && archivo.canRead()){
-                    archivo.delete();
-                }
+                uploadsFileService.delete(nameFile);
             }
         }
-
-
-
-
-
-
         return "redirect:/list";
     }
 
@@ -202,20 +162,16 @@ public class ClienteController {
     }
 
     @GetMapping("/uploads/{filename:.+}")
-    public ResponseEntity<Resource> verFoto(@PathVariable String filename){
-        //Directorio "uploads" dentro de la raíz del proyecto
-        Path pathFoto = Paths.get("uploads").resolve(filename).toAbsolutePath();
-        log.info("pathFoto: "+pathFoto);
+    public ResponseEntity<Resource> verFoto(@PathVariable String filename, RedirectAttributes flash){
+
         Resource recurso = null;
 
         try {
-            recurso = new UrlResource(pathFoto.toUri());
-            if(!recurso.exists()){
-                throw new RuntimeException("Error: no se puede cargar la imange "+pathFoto.toString());
-            }
-        } catch (MalformedURLException e) {//Rutal invalid
+            recurso = uploadsFileService.load(filename);
+        } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
+        log.info("recurso: "+recurso.toString());
         return ResponseEntity.ok().
                 header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\""+recurso.getFilename()+"\"").
                 body(recurso);
