@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -36,11 +37,13 @@ public class UploadsFileServiceImpl implements IUploadsFileService {
             String uniqueFilename = UUID.randomUUID().toString();
             String fileName = uniqueFilename+"_"+file.getOriginalFilename();
 
+            Path rootPath = getPaths("");
             Path rootAbsolutePath = getPaths(fileName);
+            log.info("rootPath: "+rootPath);
             log.info("rootAbsolutePath: "+rootAbsolutePath);
 
             //Comprobamos si exsite el direcotior de recursos del cliente
-            File directorioRecursosCliente = new File(rootAbsolutePath.getFileName().toString());
+            File directorioRecursosCliente = new File(rootPath.toAbsolutePath().toString());
             if (!directorioRecursosCliente.exists()) {
                //Si no existe lo creamos
                if (directorioRecursosCliente.mkdirs()) {
@@ -65,5 +68,15 @@ public class UploadsFileServiceImpl implements IUploadsFileService {
     }
     public Path getPaths(String filename){
         return Paths.get(URI).resolve(filename).toAbsolutePath();
+    }
+
+    @Override
+    public void deleteAll() {
+        FileSystemUtils.deleteRecursively(Paths.get(URI).toFile());
+    }
+
+    @Override
+    public void init() throws IOException {
+        Files.createDirectories(Paths.get(URI).toAbsolutePath());
     }
 }
