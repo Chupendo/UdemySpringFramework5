@@ -11,7 +11,7 @@
 			<h4 class="card-header text-primary border border-success border-top-0 border-end-0 border-start-0" th:text="${title}"></h4>
 			<div class="card-body">
 				<!-- Recoge el objeto cliente -->
-				<div th:object="${client}" th:remove="tag">
+					<div th:object="${client}" th:remove="tag">
 					<!--  Comprueba si exsiste algun error en algun campo-->
 					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
 						<!-- Si hay errores, para cada uno mostramos el mensaje de error -->
